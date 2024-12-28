@@ -98,7 +98,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Domain/FinancialManagement.Domain.csproj": {
+                "projectPath": "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Domain/FinancialManagement.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -110,6 +114,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

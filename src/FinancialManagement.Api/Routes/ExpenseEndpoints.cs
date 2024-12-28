@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using FinancialManagement.Application.DTOs.Request;
+using FinancialManagement.Application.DTOs.Request.Expense;
 using FinancialManagement.Domain.Models;
-using FinancialManagement.Domain.Repositories;
+using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Infrastructure.Repositories;
 using Npgsql.Replication;
+using FinancialManagement.Api.ExtensionsRoutes;
 
 namespace FinancialManagement.Api.Routes;
 public static class ExpenseEndpoints
@@ -29,7 +31,8 @@ public static class ExpenseEndpoints
             return Results.Created($"/expense/{result.IdExpenses}", result);
         })
         .WithDescription("Create a new expense")
-        .WithSummary("Create a new expense");
+        .WithSummary("Create a new expense")
+        .Validate<CreateExpenseDto>();
 
         expensesRoutes.MapGet("/expenses", async (IExpenseRepository expenseRepository) =>
         {
@@ -42,7 +45,7 @@ public static class ExpenseEndpoints
         expensesRoutes.MapGet("/expense", async (IExpenseRepository expenseRepository, Guid id) =>
         {
             var result = await expenseRepository.GetExpensesById(id);
-            return Results.Ok(result);
+            return result is null ? Results.NotFound() : Results.Ok(result);
         })
         .WithDescription("Get all expenses")
         .WithSummary("Get all expenses");
@@ -59,7 +62,8 @@ public static class ExpenseEndpoints
             return Results.NoContent();
         })
         .WithDescription("Update an expense")
-        .WithSummary("Update an expense");
+        .WithSummary("Update an expense")
+        .Validate<UpdateExpenseDto>();
 
         expensesRoutes.MapDelete("/expense", async (IExpenseRepository expenseRepository, Guid id) =>
         {

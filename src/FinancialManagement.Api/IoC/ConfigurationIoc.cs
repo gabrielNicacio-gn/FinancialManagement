@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FinancialManagement.Domain.Repositories;
+
+using FinancialManagement.Application.Interfaces.Services;
+using FinancialManagement.Application.Services;
+using FinancialManagement.Domain.Interfaces.Repositories;
+using FinancialManagement.Domain.Interfaces.Services;
 using FinancialManagement.Infrastructure.Data;
 using FinancialManagement.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,5 +18,9 @@ public static class ConfigurationIoc
         });
 
         builder.Services.AddScoped<IExpenseRepository, ExpensesRepository>();
+        builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
+
+        builder.Services.AddScoped<IRevenueServices, RevenueServices>();
+        builder.Services.AddScoped<IExpenseServices, IExpenseServices>();
     }
 }

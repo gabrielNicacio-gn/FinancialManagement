@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FD49Pqu2rFWcLroTOOx53mQ8rMkVYgbJ1gEHnBsa4zprHmuMDyXB//KhDBLySc01ggdf2108SckC9ukZFoDmyg==",
+  "dgSpecHash": "lKgghBsfV91Txx8T0X/iVsal67vJFC0AfdDswqTZFnRrpRYoX7QMEH6Pn5tPepBhRfa+LtvXIxrXQId9vF3CGg==",
   "success": true,
   "projectFilePath": "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/FinancialManagement.Api.csproj",
   "expectedPackageFiles": [

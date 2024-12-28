@@ -1,6 +1,6 @@
 
+using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Domain.Models;
-using FinancialManagement.Domain.Repositories;
 using FinancialManagement.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,13 +23,12 @@ public class ExpensesRepository : IExpenseRepository
                 return expenses;
         }
 
-        public async Task<Expense> GetExpensesById(Guid id)
+        public async Task<Expense?> GetExpensesById(Guid id)
         {
                 var expenses = await _context
                 .Expenses
                 .AsNoTracking()
-                .SingleOrDefaultAsync()
-                ?? throw new Exception("Expense not found");
+                .SingleOrDefaultAsync();
                 return expenses;
         }
 
@@ -51,10 +50,9 @@ public class ExpensesRepository : IExpenseRepository
 
         public async Task DeleteExpenses(Guid id)
         {
-                var expense = await _context.Expenses.FindAsync(id)
-                ?? throw new Exception("Expense not found");
-                _context.Expenses.Remove(expense);
-                await _context.SaveChangesAsync();
+                await _context.Expenses
+               .Where(e => e.IdExpenses == id)
+               .ExecuteDeleteAsync();
         }
 
         public bool ExpensesExists(Guid id)

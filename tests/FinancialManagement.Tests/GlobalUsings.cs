@@ -1,0 +1,11 @@
+global using Xunit;
+global using FinancialManagement.Application.DTOs.Request.Expense;
+global using FinancialManagement.Domain.Interfaces.Repositories;
+global using Moq;
+global using FinancialManagement.Domain.Models;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.AspNetCore.Builder;
+global using FinancialManagement.Api.Routes;
+global using System.Net.Http.Json;
+global using System.Threading.Tasks;
+global using Microsoft.AspNetCore.Http;
