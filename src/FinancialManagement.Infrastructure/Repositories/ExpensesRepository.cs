@@ -51,13 +51,13 @@ public class ExpensesRepository : IExpenseRepository
         public async Task DeleteExpenses(Guid id)
         {
                 await _context.Expenses
-               .Where(e => e.IdExpenses == id)
+               .Where(e => e.IdExpense == id)
                .ExecuteDeleteAsync();
         }
 
         public bool ExpensesExists(Guid id)
         {
-                var exist = _context.Expenses.Any(e => e.IdExpenses == id);
+                var exist = _context.Expenses.Any(e => e.IdExpense == id);
                 return exist;
         }
 }

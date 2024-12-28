@@ -21,7 +21,7 @@ public class FinancialContext : DbContext
         modelBuilder.Entity<Revenue>()
         .HasKey(r => r.IdRevenue);
         modelBuilder.Entity<Expense>()
-        .HasKey(e => e.IdExpenses);
+        .HasKey(e => e.IdExpense);
         modelBuilder.Entity<FinancialTarget>()
         .HasKey(ft => ft.IdFinancialTarget);
         modelBuilder.Entity<UserBalance>()

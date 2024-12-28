@@ -9,9 +9,9 @@ using FinancialManagement.Application.DTOs.Response;
 namespace FinancialManagement.Application.Interfaces.Services;
 public interface IExpenseServices
 {
-    Task<ExpenseResponseDto> CreateNewExpense(CreateExpenseDto newRevenue);
-    Task<RevenueResponseDto> GetExpenseById(Guid idREvenue);
-    Task<IEnumerable<RevenueResponseDto>> GetAllExpense();
-    Task UpdateExpense(UpdateRevenueDto updateRevenue, string nameProperty);
-    Task RemoveExpense(Guid idRevenue);
+    Task<ExpenseResponseDto> CreateNewExpense(CreateExpenseDto newExpense);
+    Task<ExpenseResponseDto> GetExpenseById(Guid idExpense);
+    Task<IEnumerable<ExpenseResponseDto>> GetAllExpense();
+    Task UpdateExpense(UpdateExpenseDto updateExpense, string nameProperty);
+    Task RemoveExpense(Guid idExpense);
 }

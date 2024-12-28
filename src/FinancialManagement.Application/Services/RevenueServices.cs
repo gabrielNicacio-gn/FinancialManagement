@@ -27,14 +27,14 @@ public class RevenueServices : IRevenueServices
         };
         var created = await _revenueRepository.AddRevenue(revenue);
         _logger.LogInformation($"Revenue created with id: {created.IdRevenue}");
-        return new RevenueResponseDto(created.Value, created.DateRevenue, created.Description);
+        return new RevenueResponseDto(revenue.IdRevenue, created.Value, created.DateRevenue, created.Description);
     }
 
     public async Task<IEnumerable<RevenueResponseDto>> GetAllRevenue()
     {
         var revenues = await _revenueRepository.GetRevenues();
         var response = revenues
-        .Select(revenue => new RevenueResponseDto(revenue.Value, revenue.DateRevenue, revenue.Description));
+        .Select(revenue => new RevenueResponseDto(revenue.IdRevenue, revenue.Value, revenue.DateRevenue, revenue.Description));
         _logger.LogInformation("Returning all revenues");
         return response;
     }
@@ -43,7 +43,7 @@ public class RevenueServices : IRevenueServices
     {
         var revenue = await _revenueRepository.GetRevenueById(idRevenue)
         ?? throw new Exception("Revenue not found");
-        var response = new RevenueResponseDto(revenue.Value, revenue.DateRevenue, revenue.Description);
+        var response = new RevenueResponseDto(revenue.IdRevenue, revenue.Value, revenue.DateRevenue, revenue.Description);
         _logger.LogInformation($"Returning revenue with id: {revenue.IdRevenue}");
         return response;
     }

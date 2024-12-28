@@ -10,7 +10,7 @@ namespace FinancialManagement.Domain.Models;
 public class Expense
 {
     [Column("id_expense")]
-    public Guid IdExpenses { get; set; }
+    public Guid IdExpense { get; set; }
 
     [Column("value_expense")]
     public decimal Value { get; set; }
@@ -18,8 +18,11 @@ public class Expense
     [Column("date_expense")]
     public DateTime DateExpenses { get; set; }
 
+    [Column("category_expense")]
+    public string Category { get; set; } = "";
+
     [Column("description_expense")]
     public string Description { get; set; } = "";
 
-    public Expense() => IdExpenses = Guid.NewGuid();
+    public Expense() => IdExpense = Guid.NewGuid();
 }

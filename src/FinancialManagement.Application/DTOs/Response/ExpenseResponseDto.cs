@@ -5,5 +5,5 @@ using System.Threading.Tasks;
 
 namespace FinancialManagement.Application.DTOs.Response
 {
-    public record ExpenseResponseDto(decimal Value, DateTime DateExpenses, string Description);
+    public record ExpenseResponseDto(Guid IdExpense, decimal Value, DateTime DateExpenses, string Description);
 }

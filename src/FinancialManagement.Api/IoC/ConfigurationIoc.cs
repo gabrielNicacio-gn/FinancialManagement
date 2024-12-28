@@ -21,6 +21,6 @@ public static class ConfigurationIoc
         builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
 
         builder.Services.AddScoped<IRevenueServices, RevenueServices>();
-        builder.Services.AddScoped<IExpenseServices, IExpenseServices>();
+        builder.Services.AddScoped<IExpenseServices, ExpenseServices>();
     }
 }

@@ -10,3 +10,7 @@
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/obj/Debug/net8.0/refint/FinancialManagement.Application.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/obj/Debug/net8.0/FinancialManagement.Application.pdb
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/obj/Debug/net8.0/ref/FinancialManagement.Application.dll
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/bin/Debug/net8.0/FinancialManagement.Domain.dll
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/bin/Debug/net8.0/FinancialManagement.Domain.pdb
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/obj/Debug/net8.0/FinancialManagement.Application.csproj.AssemblyReference.cache
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/obj/Debug/net8.0/FinancialManagement.Application.csproj.CopyComplete

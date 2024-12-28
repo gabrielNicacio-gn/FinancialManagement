@@ -18,4 +18,7 @@ public class CreateExpenseDto
     [Required(ErrorMessage = "The field is required.")]
     [StringLength(200, ErrorMessage = "The field {0} must have between {2} and {1} characters.", MinimumLength = 3)]
     public string Description { get; set; } = "";
+
+    [Required(ErrorMessage = "The field is required.")]
+    public string Category { get; set; } = "";
 }

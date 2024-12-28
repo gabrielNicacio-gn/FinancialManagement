@@ -20,9 +20,5 @@ public class Revenue
 
     [Column("description_revenue")]
     public string Description { get; set; } = "";
-
-    [Column("category_revenue")]
-    public string Category { get; set; } = "";
-
     public Revenue() => IdRevenue = Guid.NewGuid();
 }

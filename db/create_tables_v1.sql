@@ -8,8 +8,7 @@ CREATE TABLE revenue (
     id_revenue UUID PRIMARY KEY,
     value_revenue DECIMAL NOT NULL,
     date_revenue TIMESTAMP NOT NULL,
-    description_revenue VARCHAR(255) NOT NULL,
-    category_revenue VARCHAR(45) NOT NULL
+    description_revenue VARCHAR(255) NOT NULL
     /*UserId VARCHAR(45) NOT NULL,    
     FOREIGN KEY (id_account) REFERENCES AspNetUsers(UserId)*/
 );
@@ -18,7 +17,8 @@ CREATE TABLE expense (
     id_expense UUID PRIMARY KEY,
     value_expense DECIMAL NOT NULL,
     date_expense TIMESTAMP NOT NULL,
-    description_expense VARCHAR(255) NOT NULL
+    description_expense VARCHAR(255) NOT NULL,
+    category_expense VARCHAR(45) NOT NULL
     /*UserId VARCHAR(45) NOT NULL,    
     FOREIGN KEY (id_account) REFERENCES AspNetUsers(UserId)*/
 );

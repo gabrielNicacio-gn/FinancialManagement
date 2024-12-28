@@ -9,6 +9,7 @@ using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Infrastructure.Repositories;
 using Npgsql.Replication;
 using FinancialManagement.Api.ExtensionsRoutes;
+using FinancialManagement.Application.Interfaces.Services;
 
 namespace FinancialManagement.Api.Routes;
 public static class ExpenseEndpoints
@@ -19,55 +20,43 @@ public static class ExpenseEndpoints
         .WithTags("Expenses")
         .WithSummary("Expenses routes");
 
-        expensesRoutes.MapPost("/expense", async (IExpenseRepository expenseRepository, CreateExpenseDto request) =>
+        expensesRoutes.MapPost("/expense", async (IExpenseServices expenseServices, CreateExpenseDto request) =>
         {
-            var expense = new Expense
-            {
-                Value = request.Value,
-                DateExpenses = request.DateExpenses,
-                Description = request.Description
-            };
-            var result = await expenseRepository.AddExpenses(expense);
-            return Results.Created($"/expense/{result.IdExpenses}", result);
+            var result = await expenseServices.CreateNewExpense(request);
+            return Results.Created($"/expense/{result.IdExpense}", result);
         })
         .WithDescription("Create a new expense")
         .WithSummary("Create a new expense")
         .Validate<CreateExpenseDto>();
 
-        expensesRoutes.MapGet("/expenses", async (IExpenseRepository expenseRepository) =>
+        expensesRoutes.MapGet("/expenses", async (IExpenseServices expenseServices) =>
         {
-            var result = await expenseRepository.GetExpenses();
+            var result = await expenseServices.GetAllExpense();
             return Results.Ok(result);
         })
         .WithDescription("Get all expenses")
         .WithSummary("Get all expenses");
 
-        expensesRoutes.MapGet("/expense", async (IExpenseRepository expenseRepository, Guid id) =>
+        expensesRoutes.MapGet("/expense", async (IExpenseServices expenseServices, Guid id) =>
         {
-            var result = await expenseRepository.GetExpensesById(id);
+            var result = await expenseServices.GetExpenseById(id);
             return result is null ? Results.NotFound() : Results.Ok(result);
         })
         .WithDescription("Get all expenses")
         .WithSummary("Get all expenses");
 
-        expensesRoutes.MapPut("/expense", async (IExpenseRepository expenseRepository, UpdateExpenseDto request) =>
+        expensesRoutes.MapPut("/expense", async (IExpenseServices expenseServices, UpdateExpenseDto request) =>
         {
-            var expense = new Expense
-            {
-                Value = request.Value,
-                DateExpenses = request.DateExpenses,
-                Description = request.Description
-            };
-            await expenseRepository.UpdateExpenses(expense, nameof(expense.Value));
+            await expenseServices.UpdateExpense(request, "");
             return Results.NoContent();
         })
         .WithDescription("Update an expense")
         .WithSummary("Update an expense")
         .Validate<UpdateExpenseDto>();
 
-        expensesRoutes.MapDelete("/expense", async (IExpenseRepository expenseRepository, Guid id) =>
+        expensesRoutes.MapDelete("/expense", async (IExpenseServices expenseServices, Guid id) =>
         {
-            await expenseRepository.DeleteExpenses(id);
+            await expenseServices.RemoveExpense(id);
             return Results.NoContent();
         })
         .WithDescription("Delete an expense")

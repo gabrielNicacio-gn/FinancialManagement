@@ -3,6 +3,7 @@ using FinancialManagement.Application.DTOs.Request.Revenue;
 using FinancialManagement.Domain.Models;
 using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Api.ExtensionsRoutes;
+using FinancialManagement.Domain.Interfaces.Services;
 
 namespace FinancialManagement.Api.Routes;
 public static class RevenueEndpoints
@@ -13,16 +14,9 @@ public static class RevenueEndpoints
         .WithTags("Revenues")
         .WithSummary("Revenues routes");
 
-        revenueRoutes.MapPost("/revenue", async (IRevenueRepository revenueRepository, CreateRevenueDto request) =>
+        revenueRoutes.MapPost("/revenue", async (IRevenueServices revenueServices, CreateRevenueDto request) =>
         {
-            var revenue = new Revenue
-            {
-                Value = request.Value,
-                DateRevenue = request.DateRevenue,
-                Description = request.Description,
-                Category = request.Category
-            };
-            var result = await revenueRepository.AddRevenue(revenue);
+            var result = await revenueServices.CreateNewRevenue(request);
             return Results.Created($"/revenue/{result.IdRevenue}", result);
         })
         .WithDescription("Create a new revenue")
@@ -30,18 +24,18 @@ public static class RevenueEndpoints
         .Produces<Revenue>(201)
         .Validate<CreateRevenueDto>();
 
-        revenueRoutes.MapGet("/revenues", async (IRevenueRepository revenueRepository) =>
+        revenueRoutes.MapGet("/revenues", async (IRevenueServices revenueServices) =>
         {
-            var result = await revenueRepository.GetRevenues();
+            var result = await revenueServices.GetAllRevenue();
             return Results.Ok(result);
         })
         .WithDescription("Get all revenues")
         .WithSummary("Get all revenues")
         .Produces<List<Revenue>>(200);
 
-        revenueRoutes.MapGet("/revenue/{id}", async (IRevenueRepository revenueRepository, Guid id) =>
+        revenueRoutes.MapGet("/revenue/{id}", async (IRevenueServices revenueServices, Guid id) =>
         {
-            var result = await revenueRepository.GetRevenueById(id);
+            var result = await revenueServices.GetRevenueById(id);
             return result is null ? Results.NotFound() : Results.Ok(result);
         })
         .WithDescription("Get revenue by id")
@@ -49,16 +43,9 @@ public static class RevenueEndpoints
         .Produces<Revenue>(200)
         .Produces(404);
 
-        revenueRoutes.MapPut("/revenue", async (IRevenueRepository revenueRepository, UpdateRevenueDto request) =>
+        revenueRoutes.MapPut("/revenue", async (IRevenueServices revenueServices, UpdateRevenueDto request) =>
         {
-            var revenue = new Revenue
-            {
-                Value = request.Value,
-                DateRevenue = request.DateRevenue,
-                Description = request.Description,
-                Category = request.Category
-            };
-            await revenueRepository.UpdateRevenue(revenue, nameof(revenue.Value));
+            await revenueServices.UpdateRevenue(request, nameof(request.Description));
             return Results.NoContent();
         })
         .WithDescription("Update a revenue")
@@ -66,9 +53,9 @@ public static class RevenueEndpoints
         .Produces(204)
         .Validate<UpdateRevenueDto>();
 
-        revenueRoutes.MapDelete("/revenue/{id}", async (IRevenueRepository revenueRepository, Guid id) =>
+        revenueRoutes.MapDelete("/revenue/{id}", async (IRevenueServices revenueServices, Guid id) =>
         {
-            await revenueRepository.DeleteRevenue(id);
+            await revenueServices.RemoveRevenue(id);
             return Results.NoContent();
         })
         .WithDescription("Delete a revenue")
