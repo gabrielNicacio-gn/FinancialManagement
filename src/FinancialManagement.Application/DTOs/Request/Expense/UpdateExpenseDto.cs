@@ -19,4 +19,7 @@ public class UpdateExpenseDto
 
     [Required(ErrorMessage = "The field is required.")]
     public string Category { get; set; } = "";
+
+    [Required(ErrorMessage = "The field is required.")]
+    public string NamePropertyToBeUpdate { get; set; } = "";
 }

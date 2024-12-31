@@ -272,6 +272,10 @@
         }
       },
       "FinancialManagement.Application/1.0.0": {
+        "dependencies": {
+          "FinancialManagement.Domain": "1.0.0",
+          "Microsoft.Extensions.Logging": "9.0.0"
+        },
         "runtime": {
           "FinancialManagement.Application.dll": {}
         }

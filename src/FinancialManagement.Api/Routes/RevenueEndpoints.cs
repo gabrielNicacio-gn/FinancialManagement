@@ -1,7 +1,7 @@
+
 using FinancialManagement.Application.DTOs.Request.Expense;
 using FinancialManagement.Application.DTOs.Request.Revenue;
 using FinancialManagement.Domain.Models;
-using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Api.ExtensionsRoutes;
 using FinancialManagement.Domain.Interfaces.Services;
 
@@ -45,7 +45,7 @@ public static class RevenueEndpoints
 
         revenueRoutes.MapPut("/revenue", async (IRevenueServices revenueServices, UpdateRevenueDto request) =>
         {
-            await revenueServices.UpdateRevenue(request, nameof(request.Description));
+            await revenueServices.UpdateRevenue(request, request.NamePropertyToBeUpdate);
             return Results.NoContent();
         })
         .WithDescription("Update a revenue")

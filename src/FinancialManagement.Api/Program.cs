@@ -19,5 +19,6 @@ if (app.Environment.IsDevelopment())
 app.MapGet("/", () => "Hello World!");
 app.MapExpenseRoutes();
 app.MapRevenueRoutes();
+app.MapFinancialTargetsRoutes();
 
 app.Run();

@@ -9,3 +9,5 @@ global using FinancialManagement.Api.Routes;
 global using System.Net.Http.Json;
 global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Http;
+global using FinancialManagement.Application.Services;
+global using Microsoft.Extensions.Logging;
