@@ -16,9 +16,9 @@ if (app.Environment.IsDevelopment())
         app.UseSwaggerUI();
 }
 
-app.MapGet("/", () => "Hello World!");
 app.MapExpenseRoutes();
 app.MapRevenueRoutes();
 app.MapFinancialTargetsRoutes();
+app.MapCategoryExpenseRoutes();
 
 app.Run();

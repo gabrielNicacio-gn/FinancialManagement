@@ -20,9 +20,11 @@ public static class ConfigurationIoc
         builder.Services.AddScoped<IExpenseRepository, ExpensesRepository>();
         builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
         builder.Services.AddScoped<IFinancialTargetRepository, FinancialTargetRepository>();
+        builder.Services.AddScoped<ICategoryExpenseRepository, CategoryExpenseRepository>();
 
         builder.Services.AddScoped<IRevenueServices, RevenueServices>();
         builder.Services.AddScoped<IExpenseServices, ExpenseServices>();
         builder.Services.AddScoped<IFinancialTargetServices, FinancialTargetServices>();
+        builder.Services.AddScoped<ICategoryExpenseServices, CategoryExpenseServices>();
     }
 }

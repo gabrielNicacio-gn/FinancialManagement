@@ -18,11 +18,12 @@ public class Expense
     [Column("date_expense")]
     public DateTime DateExpenses { get; set; }
 
-    [Column("category_expense")]
-    public string Category { get; set; } = "";
-
     [Column("description_expense")]
     public string Description { get; set; } = "";
+
+    [Column("category_expense")]
+    public CategoryExpense IdCategory { get; set; }
+    public CategoryExpense CategoryeExpense { get; set; }
 
     public Expense() => IdExpense = Guid.NewGuid();
 }

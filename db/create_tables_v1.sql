@@ -1,7 +1,7 @@
 
-CREATE TABLE user_balance (
-    id_user_balance UUID PRIMARY KEY,
-    value_balance DECIMAL NOT NULL
+CREATE TABLE category_expense (
+    id_category_expense UUID PRIMARY KEY,
+    name_category VARCHAR(45) NOT NULL
 );      
 
 CREATE TABLE revenue (
@@ -18,9 +18,10 @@ CREATE TABLE expense (
     value_expense DECIMAL NOT NULL,
     date_expense TIMESTAMP NOT NULL,
     description_expense VARCHAR(255) NOT NULL,
-    category_expense VARCHAR(45) NOT NULL
+    category_expense UUID NOT NULL,
     /*UserId VARCHAR(45) NOT NULL,    
     FOREIGN KEY (id_account) REFERENCES AspNetUsers(UserId)*/
+    FOREIGN KEY (category_expense) REFERENCES category_expense(id_category_expense)
 );
 
 CREATE TABLE financial_target (
@@ -34,7 +35,7 @@ CREATE TABLE financial_target (
     FOREIGN KEY (id_account) REFERENCES AspNetUsers(UserId)*/
 );
 
-CREATE INDEX idx_user_balance ON user_balance (id_user_balance);
+CREATE INDEX idx_category_expense ON category_expense (id_category_expense);
 CREATE INDEX idx_revenue ON revenue (id_revenue);
 CREATE INDEX idx_expense ON expense (id_expense);
 CREATE INDEX idx_financial_target ON financial_target (id_financial_target);

@@ -14,18 +14,26 @@ public class FinancialContext : DbContext
     public DbSet<Revenue> Revenues { get; set; }
     public DbSet<Expense> Expenses { get; set; }
     public DbSet<FinancialTarget> FinancialTargets { get; set; }
-    public DbSet<UserBalance> UserBalances { get; set; }
+    public DbSet<CategoryExpense> CategoryExpenses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Revenue>()
         .HasKey(r => r.IdRevenue);
+
         modelBuilder.Entity<Expense>()
         .HasKey(e => e.IdExpense);
+
+        modelBuilder.Entity<Expense>()
+        .HasOne(e => e.CategoryeExpense)
+        .WithOne(ce => ce.Expense)
+        .HasForeignKey<CategoryExpense>(ce => ce.IdCategory);
+
         modelBuilder.Entity<FinancialTarget>()
         .HasKey(ft => ft.IdFinancialTarget);
-        modelBuilder.Entity<UserBalance>()
-        .HasKey(ub => ub.IdUserBalance);
+
+        modelBuilder.Entity<CategoryExpense>()
+        .HasKey(ce => ce.IdCategory);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
