@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FinancialManagement.Tests.UnitTest.RevenueTest.ServiceTest
+namespace FinancialManagement.Tests.UnitTest.RevenueTest.ServiceTest;
+public class GetRevenuesTest
 {
-    public class GetRevenuesTest
+    [Fact]
+    public async Task Should_Get_Revenues()
     {
-        [Fact]
-        public async Task Should_Get_Revenues()
-        {
-            // Arrange
-            var revenues = new List<Revenue>
+        // Arrange
+        var revenues = new List<Revenue>
             {
                 new Revenue
                 {
@@ -29,19 +28,18 @@ namespace FinancialManagement.Tests.UnitTest.RevenueTest.ServiceTest
                 }
             };
 
-            var revenueRepository = new Mock<IRevenueRepository>();
-            revenueRepository.Setup(x => x.GetRevenues()).ReturnsAsync(revenues);
+        var revenueRepository = new Mock<IRevenueRepository>();
+        revenueRepository.Setup(x => x.GetRevenues()).ReturnsAsync(revenues);
 
-            var iloggerMock = new Mock<ILogger<RevenueServices>>();
+        var iloggerMock = new Mock<ILogger<RevenueServices>>();
 
-            var revenueService = new RevenueServices(revenueRepository.Object, iloggerMock.Object);
+        var revenueService = new RevenueServices(revenueRepository.Object, iloggerMock.Object);
 
-            // Act
-            var result = await revenueService.GetAllRevenue();
+        // Act
+        var result = await revenueService.GetAllRevenue();
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(revenues.Count, result.Count());
-        }
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(revenues.Count, result.Count());
     }
 }

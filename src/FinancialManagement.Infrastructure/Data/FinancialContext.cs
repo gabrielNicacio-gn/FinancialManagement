@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FinancialManagement.Domain.Enums;
 using FinancialManagement.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,13 @@ public class FinancialContext : DbContext
 
         modelBuilder.Entity<CategoryExpense>()
         .HasKey(ce => ce.IdCategory);
+
+        modelBuilder.Entity<FinancialTarget>()
+        .Property(ft => ft.Status)
+        .HasConversion(
+            s => s.ToString(),
+            s => (StatusFinancialTarget)Enum.Parse(typeof(StatusFinancialTarget), s));
+
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

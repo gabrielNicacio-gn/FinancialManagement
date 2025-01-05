@@ -13,6 +13,7 @@ namespace FinancialManagement.Domain.Models
         public Guid IdCategory { get; set; }
         [Column("name_category")]
         public string Name { get; set; } = "";
+        public string IconUrl { get; set; } = "";
         public Expense Expense { get; set; }
         public CategoryExpense() => IdCategory = Guid.NewGuid();
     }

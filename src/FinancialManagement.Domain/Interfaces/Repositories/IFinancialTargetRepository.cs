@@ -12,5 +12,4 @@ public interface IFinancialTargetRepository
     Task<FinancialTarget> AddFinancialTarget(FinancialTarget financialTarget);
     Task UpdateFinancialTarget(FinancialTarget financialTarget, string nameProperty);
     Task DeleteFinancialTarget(Guid id);
-    bool FinancialTargetExist(Guid id);
 }

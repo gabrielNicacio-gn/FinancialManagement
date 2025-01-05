@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using FinancialManagement.Domain.Enums;
 
 namespace FinancialManagement.Domain.Models;
 
@@ -22,7 +23,7 @@ public class FinancialTarget
     public DateTime DateLimit { get; set; }
 
     [Column("status_target")]
-    public string Status { get; set; } = "";
+    public StatusFinancialTarget Status { get; set; }
 
     [Column("description_target")]
     public string Description { get; set; } = "";

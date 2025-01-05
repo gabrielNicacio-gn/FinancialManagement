@@ -19,9 +19,6 @@ public class CreateFinancialTargetDto
     public DateTime DateLimit { get; set; }
 
     [Required(ErrorMessage = "Title is required")]
-    public string Status { get; set; } = "";
-
-    [Required(ErrorMessage = "Title is required")]
     [StringLength(200, ErrorMessage = "The field {0} must have between {2} and {1} characters.", MinimumLength = 3)]
     public string Description { get; set; } = "";
 }

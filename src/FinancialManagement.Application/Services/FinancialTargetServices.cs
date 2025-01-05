@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FinancialManagement.Application.DTOs.Request.FinancialTarget;
 using FinancialManagement.Application.DTOs.Response;
 using FinancialManagement.Application.Interfaces.Services;
+using FinancialManagement.Domain.Enums;
 using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Domain.Models;
 using Microsoft.Extensions.Logging;
@@ -27,12 +28,12 @@ public class FinancialTargetServices : IFinancialTargetServices
                         ValueNeeded = newFinancialTarget.ValueNeeded,
                         DateLimit = newFinancialTarget.DateLimit,
                         Description = newFinancialTarget.Description,
-                        Status = newFinancialTarget.Status
+                        Status = StatusFinancialTarget.Accumulating
                 };
                 var financialTargetCreated = await _financialTargetRepository.AddFinancialTarget(financialTarget);
                 _logger.LogInformation($"Financial Target created with success{financialTargetCreated.IdFinancialTarget}");
                 return new FinancialTargetResponseDto(financialTargetCreated.IdFinancialTarget,
-                financialTargetCreated.Title, financialTargetCreated.ValueNeeded, financialTargetCreated.DateLimit, financialTargetCreated.Status,
+                financialTargetCreated.Title, financialTargetCreated.ValueNeeded, financialTargetCreated.DateLimit, financialTargetCreated.Status.ToString(),
                 financialTargetCreated.Description);
         }
 
@@ -41,7 +42,7 @@ public class FinancialTargetServices : IFinancialTargetServices
                 var financialTargets = await _financialTargetRepository.GetFinancialTargets();
                 _logger.LogInformation("Return all Financial Targets");
                 return financialTargets.Select(financialTarget => new FinancialTargetResponseDto(financialTarget.IdFinancialTarget,
-                financialTarget.Title, financialTarget.ValueNeeded, financialTarget.DateLimit, financialTarget.Status,
+                financialTarget.Title, financialTarget.ValueNeeded, financialTarget.DateLimit, financialTarget.Status.ToString(),
                 financialTarget.Description));
         }
 
@@ -51,7 +52,7 @@ public class FinancialTargetServices : IFinancialTargetServices
                 ?? throw new Exception("Financial Target Not Found");
                 _logger.LogInformation($"Found Fiancial Target with Id{financialTarget.IdFinancialTarget}");
                 return new FinancialTargetResponseDto(financialTarget.IdFinancialTarget, financialTarget.Title,
-                financialTarget.ValueNeeded, financialTarget.DateLimit, financialTarget.Status, financialTarget.Description);
+                financialTarget.ValueNeeded, financialTarget.DateLimit, financialTarget.Status.ToString(), financialTarget.Description);
         }
 
         public async Task RemoveFinancialTarget(Guid idFinancialTarget)
@@ -68,7 +69,6 @@ public class FinancialTargetServices : IFinancialTargetServices
                         ValueNeeded = updateFinancialTarget.ValueNeeded,
                         DateLimit = updateFinancialTarget.DateLimit,
                         Description = updateFinancialTarget.Description,
-                        Status = updateFinancialTarget.Status
                 };
                 await _financialTargetRepository.UpdateFinancialTarget(financialTarget,
                 nameProperty);

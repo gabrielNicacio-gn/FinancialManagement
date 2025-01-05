@@ -22,7 +22,7 @@ public class Expense
     public string Description { get; set; } = "";
 
     [Column("category_expense")]
-    public CategoryExpense IdCategory { get; set; }
+    public Guid IdCategory { get; set; }
     public CategoryExpense CategoryeExpense { get; set; }
 
     public Expense() => IdExpense = Guid.NewGuid();

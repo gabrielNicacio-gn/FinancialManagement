@@ -17,8 +17,12 @@
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Microsoft.OpenApi.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Npgsql.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/System.IO.Pipelines.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/System.Text.Encodings.Web.dll
@@ -35,6 +39,7 @@
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.AssemblyInfoInputs.cache
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.AssemblyInfo.cs
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.csproj.CoreCompileInputs.cache
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.MvcApplicationPartsAssemblyInfo.cs
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.MvcApplicationPartsAssemblyInfo.cache
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.sourcelink.json
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/staticwebassets.build.json
@@ -51,8 +56,3 @@
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.pdb
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.genruntimeconfig.cache
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/ref/FinancialManagement.Api.dll
-/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Microsoft.OpenApi.dll
-/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
-/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
-/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
-/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.MvcApplicationPartsAssemblyInfo.cs

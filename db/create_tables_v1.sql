@@ -29,7 +29,7 @@ CREATE TABLE financial_target (
     title_target VARCHAR(45) NOT NULL,
     value_needed DECIMAL NOT NULL,
     date_limit TIMESTAMP NOT NULL,
-    status_target VARCHAR(45) NOT NULL,
+    status_target TEXT NOT NULL,
     description_target VARCHAR(255) NOT NULL
     /*UserId VARCHAR(45) NOT NULL,    
     FOREIGN KEY (id_account) REFERENCES AspNetUsers(UserId)*/

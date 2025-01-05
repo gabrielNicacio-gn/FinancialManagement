@@ -56,11 +56,4 @@ public class FinancialTargetRepository : IFinancialTargetRepository
                .Where(e => e.IdFinancialTarget == id)
                .ExecuteDeleteAsync();
         }
-
-        public bool FinancialTargetExist(Guid id)
-        {
-                var exist = _context.FinancialTargets.Any(e => e.IdFinancialTarget == id);
-                return exist;
-        }
-
 }

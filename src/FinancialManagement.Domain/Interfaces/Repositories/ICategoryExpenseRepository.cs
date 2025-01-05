@@ -12,5 +12,4 @@ public interface ICategoryExpenseRepository
     Task<CategoryExpense> AddCategoryExpense(CategoryExpense expense);
     Task UpdateCategoryExpense(CategoryExpense categoryExpense, string nameProperty);
     Task DeleteCategoryExpense(Guid id);
-    bool CategoryExpenseExists(Guid id);
 }

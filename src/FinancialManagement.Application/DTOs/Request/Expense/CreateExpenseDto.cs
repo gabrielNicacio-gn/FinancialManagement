@@ -20,5 +20,5 @@ public class CreateExpenseDto
     public string Description { get; set; } = "";
 
     [Required(ErrorMessage = "The field is required.")]
-    public string Category { get; set; } = "";
+    public Guid CategoryExpense { get; set; }
 }

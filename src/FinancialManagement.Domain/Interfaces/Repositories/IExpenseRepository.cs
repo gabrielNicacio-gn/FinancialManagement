@@ -12,5 +12,4 @@ public interface IExpenseRepository
     Task<Expense> AddExpenses(Expense expense);
     Task UpdateExpenses(Expense expense, string nameProperty);
     Task DeleteExpenses(Guid id);
-    bool ExpensesExists(Guid id);
 }

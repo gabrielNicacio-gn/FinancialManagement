@@ -12,5 +12,4 @@ public interface IRevenueRepository
     Task<Revenue> AddRevenue(Revenue revenue);
     Task UpdateRevenue(Revenue revenue, string nameProperty);
     Task DeleteRevenue(Guid id);
-    bool RevenueExists(Guid id);
 }

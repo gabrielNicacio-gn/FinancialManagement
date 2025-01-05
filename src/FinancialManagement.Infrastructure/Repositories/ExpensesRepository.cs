@@ -18,6 +18,7 @@ public class ExpensesRepository : IExpenseRepository
         {
                 var expenses = await _context.Expenses
                 .AsNoTracking()
+                .Include(e => e.CategoryeExpense)
                 .OrderByDescending(e => e.DateExpenses)
                 .ToListAsync();
                 return expenses;
@@ -28,6 +29,7 @@ public class ExpensesRepository : IExpenseRepository
                 var expenses = await _context
                 .Expenses
                 .AsNoTracking()
+                .Include(e => e.CategoryeExpense)
                 .SingleOrDefaultAsync();
                 return expenses;
         }
@@ -53,11 +55,5 @@ public class ExpensesRepository : IExpenseRepository
                 await _context.Expenses
                .Where(e => e.IdExpense == id)
                .ExecuteDeleteAsync();
-        }
-
-        public bool ExpensesExists(Guid id)
-        {
-                var exist = _context.Expenses.Any(e => e.IdExpense == id);
-                return exist;
         }
 }
