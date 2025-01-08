@@ -1,7 +1,8 @@
 
 CREATE TABLE category_expense (
     id_category_expense UUID PRIMARY KEY,
-    name_category VARCHAR(45) NOT NULL
+    name_category VARCHAR(45) NOT NULL,
+    icon_category VARCHAR(45) NOT NULL
 );      
 
 CREATE TABLE revenue (

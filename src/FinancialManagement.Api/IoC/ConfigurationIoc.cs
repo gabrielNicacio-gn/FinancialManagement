@@ -3,6 +3,7 @@ using FinancialManagement.Application.Interfaces.Services;
 using FinancialManagement.Application.Services;
 using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Domain.Interfaces.Services;
+using FinancialManagement.Identity.Data;
 using FinancialManagement.Infrastructure.Data;
 using FinancialManagement.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,11 @@ public static class ConfigurationIoc
     public static void ConfigureIoc(this WebApplicationBuilder builder)
     {
         builder.Services.AddDbContext<FinancialContext>(options =>
+        {
+            options.UseNpgsql(builder.Configuration.GetConnectionString("npgsqlConnStr"));
+        });
+
+        builder.Services.AddDbContext<FinancialManagementIdentityContext>(options =>
         {
             options.UseNpgsql(builder.Configuration.GetConnectionString("npgsqlConnStr"));
         });

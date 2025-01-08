@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using FinancialManagement.Application.DTOs.Request.Expense;
-using FinancialManagement.Application.DTOs.Request.Revenue;
 using FinancialManagement.Application.DTOs.Response;
 using FinancialManagement.Application.Interfaces.Services;
 using FinancialManagement.Domain.Interfaces.Repositories;
@@ -31,7 +27,8 @@ public class ExpenseServices : IExpenseServices
         };
         var created = await _expenseRepository.AddExpenses(expense);
         _logger.LogInformation($"Expense created with id: {created.IdExpense}");
-        return new ExpenseResponseDto(expense.IdExpense, created.Value, created.DateExpenses, created.Description);
+        return new ExpenseResponseDto(expense.IdExpense, created.Value, created.DateExpenses,
+        created.Description, created.CategoryeExpense.IdCategory, created.CategoryeExpense.Name);
     }
 
     public async Task<IEnumerable<ExpenseResponseDto>> GetAllExpense()
@@ -39,7 +36,8 @@ public class ExpenseServices : IExpenseServices
         var expenses = await _expenseRepository.GetExpenses();
         _logger.LogInformation($"Found {expenses.Count()} expenses");
         return expenses
-        .Select(expense => new ExpenseResponseDto(expense.IdExpense, expense.Value, expense.DateExpenses, expense.Description));
+        .Select(expense => new ExpenseResponseDto(expense.IdExpense, expense.Value, expense.DateExpenses,
+        expense.Description, expense.CategoryeExpense.IdCategory, expense.CategoryeExpense.Name));
 
     }
 
@@ -48,7 +46,8 @@ public class ExpenseServices : IExpenseServices
         var expense = await _expenseRepository.GetExpensesById(idExpense)
         ?? throw new Exception("Expense not found");
         _logger.LogInformation($"Found expense with id: {expense.IdExpense}");
-        return new ExpenseResponseDto(expense.IdExpense, expense.Value, expense.DateExpenses, expense.Description);
+        return new ExpenseResponseDto(expense.IdExpense, expense.Value, expense.DateExpenses, expense.Description,
+        expense.CategoryeExpense.IdCategory, expense.CategoryeExpense.Name);
     }
 
     public async Task RemoveExpense(Guid idExpense)

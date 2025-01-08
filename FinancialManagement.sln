@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DD1F5A9F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialManagement.Tests", "tests\FinancialManagement.Tests\FinancialManagement.Tests.csproj", "{966D241D-38BE-48AE-89F9-C529ACC257ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialManagement.Identity", "src\FinancialManagement.Identity\FinancialManagement.Identity.csproj", "{1DCC2E30-1CED-41BD-A5ED-06DC317E577B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{966D241D-38BE-48AE-89F9-C529ACC257ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{966D241D-38BE-48AE-89F9-C529ACC257ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{966D241D-38BE-48AE-89F9-C529ACC257ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DCC2E30-1CED-41BD-A5ED-06DC317E577B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DCC2E30-1CED-41BD-A5ED-06DC317E577B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DCC2E30-1CED-41BD-A5ED-06DC317E577B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DCC2E30-1CED-41BD-A5ED-06DC317E577B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{37C9C75D-1CD7-4E99-8B4D-194CB0812FC1} = {96EC56B8-0B02-45DA-AF88-FFFCA20A8C28}
 		{684EB477-77A6-4F5F-9AFB-80CB3DB23D8F} = {96EC56B8-0B02-45DA-AF88-FFFCA20A8C28}
 		{966D241D-38BE-48AE-89F9-C529ACC257ED} = {DD1F5A9F-10D1-4685-AB4B-C1CAFEE2473B}
+		{1DCC2E30-1CED-41BD-A5ED-06DC317E577B} = {96EC56B8-0B02-45DA-AF88-FFFCA20A8C28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {37EF7FC0-7AC7-43C1-8338-7D9E7182FE0E}
