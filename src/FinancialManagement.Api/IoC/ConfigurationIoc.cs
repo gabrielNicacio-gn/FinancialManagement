@@ -1,9 +1,11 @@
 
+using FinancialManagement.Application.Interfaces.IdentityServices;
 using FinancialManagement.Application.Interfaces.Services;
 using FinancialManagement.Application.Services;
 using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Domain.Interfaces.Services;
 using FinancialManagement.Identity.Data;
+using FinancialManagement.Identity.Services;
 using FinancialManagement.Infrastructure.Data;
 using FinancialManagement.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -32,5 +34,6 @@ public static class ConfigurationIoc
         builder.Services.AddScoped<IExpenseServices, ExpenseServices>();
         builder.Services.AddScoped<IFinancialTargetServices, FinancialTargetServices>();
         builder.Services.AddScoped<ICategoryExpenseServices, CategoryExpenseServices>();
+        builder.Services.AddScoped<IIdentityServices, IdentityService>();
     }
 }

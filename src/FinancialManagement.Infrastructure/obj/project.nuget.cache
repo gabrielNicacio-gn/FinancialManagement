@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "P6ohQ7eVtKgujktKxBMTOw4sjd+lDfsmBUPaktevROFu6z+j1ynnW9rkEQu6Qn5IZhiEfTx7K/Tvl7BRsLEEqg==",
+  "dgSpecHash": "Ffp7XpUv/o3CPDAGNbCZlsOTF5tP7MZgU28IIJlRbnW0t0hMZ3ByKux/PA5gKSLNaOcLU1y9I9VRyKvU/+wbig==",
   "success": true,
   "projectFilePath": "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Infrastructure/FinancialManagement.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -46,7 +46,8 @@
     "/home/nicacio/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/nicacio/.nuget/packages/system.text.encodings.web/9.0.0/system.text.encodings.web.9.0.0.nupkg.sha512",
     "/home/nicacio/.nuget/packages/system.text.json/9.0.0/system.text.json.9.0.0.nupkg.sha512",
-    "/home/nicacio/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
+    "/home/nicacio/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512",
+    "/home/nicacio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
   ],
   "logs": []
 }

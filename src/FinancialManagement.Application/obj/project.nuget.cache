@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1wA4ZIGZxNPcNDfsOREvOQzcJrmJtzKKvDYoT/0jjoWzxq6UtPauPRiGGhyack6Mpb0f0Do5Q3B8W0UsxiXtzg==",
+  "dgSpecHash": "Vcpvfx9P8TBPeptwZUj8R6SqXQYqwuy629dh/RWeVHKsjfjjq+GoGXEdOcJRL+KEt6phFeYjjYNOdaxXQj9ihQ==",
   "success": true,
   "projectFilePath": "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/FinancialManagement.Application.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,8 @@
     "/home/nicacio/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.0/microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
     "/home/nicacio/.nuget/packages/microsoft.extensions.options/9.0.0/microsoft.extensions.options.9.0.0.nupkg.sha512",
     "/home/nicacio/.nuget/packages/microsoft.extensions.primitives/9.0.0/microsoft.extensions.primitives.9.0.0.nupkg.sha512",
-    "/home/nicacio/.nuget/packages/system.diagnostics.diagnosticsource/9.0.0/system.diagnostics.diagnosticsource.9.0.0.nupkg.sha512"
+    "/home/nicacio/.nuget/packages/system.diagnostics.diagnosticsource/9.0.0/system.diagnostics.diagnosticsource.9.0.0.nupkg.sha512",
+    "/home/nicacio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
   ],
   "logs": []
 }

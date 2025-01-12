@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7EibHDxcvFXzNowGKyvsV5Oe9XVixQJ96yttjr/EYOy5HhcNa5anVe3HhtKTVGihScdOm78pp50gd9nnbfGtig==",
+  "dgSpecHash": "iYrmLePftZvhs+peTr6yn3kvg/6PWw91CA5uAUs91hhzsGBrG/960lEa2TpnoCSBcVvt6hk+orDOxGkmeIFi+Q==",
   "success": true,
   "projectFilePath": "/home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/FinancialManagement.Tests.csproj",
   "expectedPackageFiles": [
@@ -135,7 +135,8 @@
     "/home/nicacio/.nuget/packages/xunit.core/2.4.2/xunit.core.2.4.2.nupkg.sha512",
     "/home/nicacio/.nuget/packages/xunit.extensibility.core/2.4.2/xunit.extensibility.core.2.4.2.nupkg.sha512",
     "/home/nicacio/.nuget/packages/xunit.extensibility.execution/2.4.2/xunit.extensibility.execution.2.4.2.nupkg.sha512",
-    "/home/nicacio/.nuget/packages/xunit.runner.visualstudio/2.4.5/xunit.runner.visualstudio.2.4.5.nupkg.sha512"
+    "/home/nicacio/.nuget/packages/xunit.runner.visualstudio/2.4.5/xunit.runner.visualstudio.2.4.5.nupkg.sha512",
+    "/home/nicacio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
   ],
   "logs": []
 }
