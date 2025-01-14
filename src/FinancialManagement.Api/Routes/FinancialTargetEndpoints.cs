@@ -1,5 +1,5 @@
 
-using FinancialManagement.Api.ExtensionsRoutes;
+using FinancialManagement.Api.Extensions;
 using FinancialManagement.Application.DTOs.Request.FinancialTarget;
 using FinancialManagement.Application.Interfaces.Services;
 
@@ -10,7 +10,8 @@ public static class FinancialTargetEndpoints
         {
                 var financialTargetRoutes = app.MapGroup("/")
                 .WithTags("Financial Target")
-                .WithSummary("Financial Target routes");
+                .WithSummary("Financial Target routes")
+                .RequireAuthorization();
 
                 financialTargetRoutes.MapGet("/financial-targets", async (IFinancialTargetServices financialTargetServices) =>
                 {

@@ -888,6 +888,7 @@
       },
       "FinancialManagement.Identity/1.0.0": {
         "dependencies": {
+          "FinancialManagement.Application": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.8",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
           "Microsoft.AspNetCore.Identity.UI": "8.0.8",

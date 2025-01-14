@@ -19,7 +19,7 @@ public class LoginResponseDto
     public LoginResponseDto(bool isSucess = true) : this()
     => IsSucess = isSucess;
 
-    public LoginResponseDto(string token) : this()
+    public LoginResponseDto(bool isSucess, string token) : this(isSucess)
     => Token = token;
 
     public void AddError(string error) =>

@@ -34,6 +34,6 @@ public static class ConfigurationIoc
         builder.Services.AddScoped<IExpenseServices, ExpenseServices>();
         builder.Services.AddScoped<IFinancialTargetServices, FinancialTargetServices>();
         builder.Services.AddScoped<ICategoryExpenseServices, CategoryExpenseServices>();
-        builder.Services.AddScoped<IIdentityServices, IdentityService>();
+        builder.Services.AddTransient<IIdentityServices, IdentityServices>();
     }
 }

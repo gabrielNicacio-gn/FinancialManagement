@@ -5,36 +5,39 @@ using System.Text;
 using FinancialManagement.Application.DTOs.Request.Identity;
 using FinancialManagement.Application.DTOs.Response;
 using FinancialManagement.Application.Interfaces.IdentityServices;
+using FinancialManagement.Identity.Configurations;
+using FinancialManagement.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql.Internal;
 
 namespace FinancialManagement.Identity.Services;
-public class IdentityService : IIdentityServices
+public class IdentityServices : IIdentityServices
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly JwtBearerOptions _jwtBearer;
-    public IdentityService(SignInManager<IdentityUser> signInManager,
-                           UserManager<IdentityUser> userManager,
-                           JwtBearerOptions jwtBearer)
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
+    private readonly JwtOptions _jwtBearer;
+    public IdentityServices(SignInManager<User> signInManager,
+                           UserManager<User> userManager,
+                           IOptions<JwtOptions> jwtBearer)
     {
         _signInManager = signInManager;
         _userManager = userManager;
-        _jwtBearer = jwtBearer;
+        _jwtBearer = jwtBearer.Value;
     }
 
     public async Task<RegisterUserResponseDto> RegisterUser(RegisterUserRequestDto userRequestDto)
     {
-        var identityUser = new IdentityUser()
+        var identityUser = new User()
         {
             Email = userRequestDto.Email,
             UserName = userRequestDto.UserName,
         };
 
-        var passwordHasher = new PasswordHasher<IdentityUser>();
+        var passwordHasher = new PasswordHasher<User>();
         var hash = passwordHasher.HashPassword(identityUser, userRequestDto.Password);
         identityUser.PasswordHash = hash;
 
@@ -55,11 +58,13 @@ public class IdentityService : IIdentityServices
     }
     public async Task<LoginResponseDto> Login(LoginRequestDto userRequestDto)
     {
-        var result = await _signInManager.PasswordSignInAsync(userRequestDto.Email, userRequestDto.Password, true, false);
+        var user = await _userManager.FindByEmailAsync(userRequestDto.Email);
+        var result = await _signInManager.CheckPasswordSignInAsync(user, userRequestDto.Password, false);
         if (result.Succeeded)
         {
-            return await GenerateJwtToken(userRequestDto.Email);
-
+            await _signInManager.SignInAsync(user, false);
+            var token = await GenerateJwtToken(result.Succeeded, userRequestDto.Email);
+            return token;
         }
 
         var loginResponse = new LoginResponseDto(result.Succeeded);
@@ -72,6 +77,8 @@ public class IdentityService : IIdentityServices
                 loginResponse.AddError("This account is not allowed to log in");
             else if (result.RequiresTwoFactor)
                 loginResponse.AddError("Required external authentication");
+
+            loginResponse.AddError("Email or Password incorrect");
         }
         return loginResponse;
     }
@@ -81,37 +88,35 @@ public class IdentityService : IIdentityServices
         await _signInManager.SignOutAsync();
     }
 
-    private async Task<LoginResponseDto> GenerateJwtToken(string email)
+    private async Task<LoginResponseDto> GenerateJwtToken(bool isSucess, string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
         var claims = GetClaims(user);
+        var expirations = DateTime.Now.AddSeconds(double.Parse(ConfigurationAppSettingsJson()["JWT:DateExpiration"]!));
+        var secretKey = Encoding.ASCII.GetBytes(ConfigurationAppSettingsJson()["JWT:SecretKey"]!);
+        var credentials = new SigningCredentials(new SymmetricSecurityKey(secretKey)
+            , SecurityAlgorithms.HmacSha256Signature);
 
-        var secretSigningKey = Encoding.ASCII.GetBytes
-           (ConfigurationAppSettingsJson().GetValue<string>("JWT:SecretKey")!);
+        var tokenDescription = new JwtSecurityToken(
+            issuer: ConfigurationAppSettingsJson()["JWT:Issuer"],
+            audience: ConfigurationAppSettingsJson()["JWT:Audience"],
+            claims: claims,
+            expires: expirations,
+            signingCredentials: credentials
+        );
 
         var jwtHandler = new JwtSecurityTokenHandler();
 
-        var credentials = new SigningCredentials(new SymmetricSecurityKey(secretSigningKey)
-            , SecurityAlgorithms.HmacSha256Signature);
-        var tokenDescription = new SecurityTokenDescriptor()
-        {
-            Subject = claims,
-            SigningCredentials = credentials,
-            Expires = DateTime.UtcNow.AddHours(2),
-            Issuer = ConfigurationAppSettingsJson().GetValue<string>("JWT:Issuer"),
-            IssuedAt = DateTime.UtcNow
-        };
-        var newToken = jwtHandler.CreateToken(tokenDescription);
+        var encodedToken = jwtHandler.WriteToken(tokenDescription);
 
-        var encodedToken = jwtHandler.WriteToken(newToken);
-
-        return new LoginResponseDto(encodedToken);
+        return new LoginResponseDto(isSucess, encodedToken);
     }
 
-    private ClaimsIdentity GetClaims(IdentityUser user)
+    private List<Claim> GetClaims(User user)
     {
-        var claims = new ClaimsIdentity();
-        claims.AddClaim(new Claim(ClaimTypes.Name, user.Id.ToString()));
+        var claims = new List<Claim>();
+        claims.Add(new Claim(ClaimTypes.Name, user.Id.ToString()));
+        claims.Add(new Claim(ClaimTypes.Email, user.Email!.ToString()));
         return claims;
     }
 

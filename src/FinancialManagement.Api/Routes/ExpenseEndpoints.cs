@@ -1,6 +1,6 @@
 
 using FinancialManagement.Application.DTOs.Request.Expense;
-using FinancialManagement.Api.ExtensionsRoutes;
+using FinancialManagement.Api.Extensions;
 using FinancialManagement.Application.Interfaces.Services;
 
 namespace FinancialManagement.Api.Routes;
@@ -10,7 +10,8 @@ public static class ExpenseEndpoints
     {
         var expensesRoutes = app.MapGroup("/")
         .WithTags("Expenses")
-        .WithSummary("Expenses routes");
+        .WithSummary("Expenses routes")
+        .RequireAuthorization();
 
         expensesRoutes.MapPost("/expense", async (IExpenseServices expenseServices, CreateExpenseDto request) =>
         {

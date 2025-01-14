@@ -12,15 +12,13 @@ public class RegisterUserRequestDto
     public string Email { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "UserName is required")]
-    [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
-    [MaxLength(50, ErrorMessage = "Password must be between 8 and 30 characters")]
+    [StringLength(50, ErrorMessage = "Username must be between 8 and 50 characters", MinimumLength = 8)]
     public string UserName { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Password is required")]
-    [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
+    [StringLength(50, ErrorMessage = "Password must be between 8 and 50 characters", MinimumLength = 8)]
     [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*[@%#$*^{}&]).+$"
         , ErrorMessage = "Password does no meet requirements")]
-    [MaxLength(30, ErrorMessage = "Password must be between 8 and 30 characters")]
     public string Password { get; set; } = string.Empty;
 
     [Compare(nameof(Password), ErrorMessage = "Passwords must be the same")]

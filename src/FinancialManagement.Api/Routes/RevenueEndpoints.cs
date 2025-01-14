@@ -2,7 +2,7 @@
 using FinancialManagement.Application.DTOs.Request.Expense;
 using FinancialManagement.Application.DTOs.Request.Revenue;
 using FinancialManagement.Domain.Models;
-using FinancialManagement.Api.ExtensionsRoutes;
+using FinancialManagement.Api.Extensions;
 using FinancialManagement.Domain.Interfaces.Services;
 
 namespace FinancialManagement.Api.Routes;
@@ -12,7 +12,8 @@ public static class RevenueEndpoints
     {
         var revenueRoutes = app.MapGroup("/")
         .WithTags("Revenues")
-        .WithSummary("Revenues routes");
+        .WithSummary("Revenues routes")
+        .RequireAuthorization();
 
         revenueRoutes.MapPost("/revenue", async (IRevenueServices revenueServices, CreateRevenueDto request) =>
         {

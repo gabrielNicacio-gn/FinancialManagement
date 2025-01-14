@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FinancialManagement.Api.ExtensionsRoutes;
+namespace FinancialManagement.Api.Extensions;
 public static class ExtensionsDataValidation
 {
     public static RouteHandlerBuilder Validate<T>(this RouteHandlerBuilder builder)

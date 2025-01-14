@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FinancialManagement.Api.ExtensionsRoutes;
+using FinancialManagement.Api.Extensions;
 using FinancialManagement.Application.DTOs.Request.CategoryExpense;
 using FinancialManagement.Application.Interfaces.Services;
 
@@ -13,7 +13,8 @@ public static class CategoryExpenseEndpoints
     {
         var expensesRoutes = app.MapGroup("/")
         .WithTags("CategoryExpenses")
-        .WithSummary("CategoryExpenses routes");
+        .WithSummary("CategoryExpenses routes")
+        .RequireAuthorization();
 
         expensesRoutes.MapPost("/category-expense", async (ICategoryExpenseServices categoryEcxpenseServices, CreateCategoryExpenseDto request) =>
         {
