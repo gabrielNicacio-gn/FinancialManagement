@@ -12,11 +12,11 @@ public static class IdentityRoutes
 {
     public static void MapIndentityRoutes(this WebApplication app)
     {
-        app.MapGroup("/")
+        var identityRoutes = app.MapGroup("/")
         .WithTags("Autentication")
         .WithSummary("Autentication Routes");
 
-        app.MapPost("/register", async (IIdentityServices identityServices, RegisterUserRequestDto registerUser) =>
+        identityRoutes.MapPost("/register", async (IIdentityServices identityServices, RegisterUserRequestDto registerUser) =>
         {
             var result = await identityServices.RegisterUser(registerUser);
             return result.IsSucess
@@ -26,17 +26,20 @@ public static class IdentityRoutes
         .Validate<RegisterUserRequestDto>()
         .AllowAnonymous();
 
-        app.MapPost("/login", async (IIdentityServices identityServices, LoginRequestDto login) =>
+        identityRoutes.MapPost("/login", async (IIdentityServices identityServices, LoginRequestDto login) =>
        {
            var result = await identityServices.Login(login);
-           return result.IsSucess
-           ? Results.Ok(result)
-           : Results.BadRequest(result.Errors);
+           var loginResult =
+           result.IsSucess ? Results.Ok(result) : Results.Unauthorized();
+           if (result.IsSucess != true && result.Errors.Any())
+               loginResult = Results.BadRequest(result);
+
+           return loginResult;
        })
        .Validate<LoginRequestDto>()
        .AllowAnonymous();
 
-        app.MapPost("/logout", async (IIdentityServices identityServices) =>
+        identityRoutes.MapPost("/logout", async (IIdentityServices identityServices) =>
        {
            await identityServices.Logout();
            return Results.Ok();

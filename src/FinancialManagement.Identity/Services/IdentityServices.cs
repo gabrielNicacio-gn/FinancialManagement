@@ -58,11 +58,11 @@ public class IdentityServices : IIdentityServices
     }
     public async Task<LoginResponseDto> Login(LoginRequestDto userRequestDto)
     {
-        var user = await _userManager.FindByEmailAsync(userRequestDto.Email);
-        var result = await _signInManager.CheckPasswordSignInAsync(user, userRequestDto.Password, false);
+        User? user = await _userManager.FindByEmailAsync(userRequestDto.Email);
+        var result = await _signInManager.CheckPasswordSignInAsync(user!, userRequestDto.Password, false);
         if (result.Succeeded)
         {
-            await _signInManager.SignInAsync(user, false);
+            await _signInManager.SignInAsync(user!, false);
             var token = await GenerateJwtToken(result.Succeeded, userRequestDto.Email);
             return token;
         }
@@ -92,17 +92,15 @@ public class IdentityServices : IIdentityServices
     {
         var user = await _userManager.FindByEmailAsync(email);
         var claims = GetClaims(user);
-        var expirations = DateTime.Now.AddSeconds(double.Parse(ConfigurationAppSettingsJson()["JWT:DateExpiration"]!));
-        var secretKey = Encoding.ASCII.GetBytes(ConfigurationAppSettingsJson()["JWT:SecretKey"]!);
-        var credentials = new SigningCredentials(new SymmetricSecurityKey(secretKey)
-            , SecurityAlgorithms.HmacSha256Signature);
+        var expirations = DateTime.Now.AddSeconds(_jwtBearer.Expirations);
+
 
         var tokenDescription = new JwtSecurityToken(
-            issuer: ConfigurationAppSettingsJson()["JWT:Issuer"],
-            audience: ConfigurationAppSettingsJson()["JWT:Audience"],
+            issuer: _jwtBearer.Issuer,
+            audience: _jwtBearer.Issuer,
             claims: claims,
             expires: expirations,
-            signingCredentials: credentials
+            signingCredentials: _jwtBearer.SigningCredentials
         );
 
         var jwtHandler = new JwtSecurityTokenHandler();
@@ -118,14 +116,5 @@ public class IdentityServices : IIdentityServices
         claims.Add(new Claim(ClaimTypes.Name, user.Id.ToString()));
         claims.Add(new Claim(ClaimTypes.Email, user.Email!.ToString()));
         return claims;
-    }
-
-    private static IConfigurationRoot ConfigurationAppSettingsJson()
-    {
-        var configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.Development.json")
-            .Build();
-        return configuration;
     }
 }
