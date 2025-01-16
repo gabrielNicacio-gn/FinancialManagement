@@ -58,12 +58,17 @@ public class IdentityServices : IIdentityServices
     }
     public async Task<LoginResponseDto> Login(LoginRequestDto userRequestDto)
     {
-        User? user = await _userManager.FindByEmailAsync(userRequestDto.Email);
+        var user = await _userManager.FindByEmailAsync(userRequestDto.Email);
+
+        if (user is null)
+            return new LoginResponseDto(false);
+
         var result = await _signInManager.CheckPasswordSignInAsync(user!, userRequestDto.Password, false);
         if (result.Succeeded)
         {
             await _signInManager.SignInAsync(user!, false);
-            var token = await GenerateJwtToken(result.Succeeded, userRequestDto.Email);
+            var claims = GetClaims(user);
+            var token = GenerateJwtToken(result.Succeeded, claims);
             return token;
         }
 
@@ -83,21 +88,13 @@ public class IdentityServices : IIdentityServices
         return loginResponse;
     }
 
-    public async Task Logout()
+    private LoginResponseDto GenerateJwtToken(bool isSucess, IEnumerable<Claim> claims)
     {
-        await _signInManager.SignOutAsync();
-    }
-
-    private async Task<LoginResponseDto> GenerateJwtToken(bool isSucess, string email)
-    {
-        var user = await _userManager.FindByEmailAsync(email);
-        var claims = GetClaims(user);
-        var expirations = DateTime.Now.AddSeconds(_jwtBearer.Expirations);
-
+        var expirations = DateTime.UtcNow.AddSeconds(_jwtBearer.Expirations);
 
         var tokenDescription = new JwtSecurityToken(
             issuer: _jwtBearer.Issuer,
-            audience: _jwtBearer.Issuer,
+            audience: _jwtBearer.Audience,
             claims: claims,
             expires: expirations,
             signingCredentials: _jwtBearer.SigningCredentials
@@ -113,8 +110,8 @@ public class IdentityServices : IIdentityServices
     private List<Claim> GetClaims(User user)
     {
         var claims = new List<Claim>();
-        claims.Add(new Claim(ClaimTypes.Name, user.Id.ToString()));
-        claims.Add(new Claim(ClaimTypes.Email, user.Email!.ToString()));
+        claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+        claims.Add(new Claim(ClaimTypes.Name, user.UserName!.ToString()));
         return claims;
     }
 }

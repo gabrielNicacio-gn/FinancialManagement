@@ -11,6 +11,5 @@ namespace FinancialManagement.Application.Interfaces.IdentityServices
     {
         Task<RegisterUserResponseDto> RegisterUser(RegisterUserRequestDto userRequestDto);
         Task<LoginResponseDto> Login(LoginRequestDto userRequestDto);
-        Task Logout();
     }
 }

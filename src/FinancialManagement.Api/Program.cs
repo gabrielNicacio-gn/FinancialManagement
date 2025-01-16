@@ -4,9 +4,8 @@ using FinancialManagement.Api.Routes;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+builder.Services.AddSwagger();
 builder.ConfigureIoc();
 builder.Services.AddAuthentication(builder.Configuration);
 

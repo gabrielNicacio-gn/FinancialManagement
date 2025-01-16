@@ -27,6 +27,8 @@ public static class ConfigurationIoc
             options.UseNpgsql(builder.Configuration.GetConnectionString("npgsqlConnStr"));
         });
 
+
+
         builder.Services.AddScoped<IExpenseRepository, ExpensesRepository>();
         builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
         builder.Services.AddScoped<IFinancialTargetRepository, FinancialTargetRepository>();

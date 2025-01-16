@@ -31,20 +31,13 @@ public static class IdentityRoutes
            var result = await identityServices.Login(login);
            var loginResult =
            result.IsSucess ? Results.Ok(result) : Results.Unauthorized();
-           if (result.IsSucess != true && result.Errors.Any())
+           if (!result.IsSucess && result.Errors.Count > 0)
                loginResult = Results.BadRequest(result);
 
            return loginResult;
        })
        .Validate<LoginRequestDto>()
        .AllowAnonymous();
-
-        identityRoutes.MapPost("/logout", async (IIdentityServices identityServices) =>
-       {
-           await identityServices.Logout();
-           return Results.Ok();
-       })
-       .RequireAuthorization();
 
     }
 }

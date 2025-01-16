@@ -56,6 +56,7 @@ public static class UseAtentication
                 ValidIssuer = configuration.GetSection("JwtOptions:Issuer").Value,
 
                 ValidateAudience = true,
+                ValidAudience = configuration.GetSection("JwtOptions:Audience").Value,
                 ValidateLifetime = true,
 
                 ValidateIssuerSigningKey = true,
