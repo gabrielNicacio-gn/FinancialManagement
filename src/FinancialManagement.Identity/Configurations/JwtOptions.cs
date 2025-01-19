@@ -10,7 +10,9 @@ namespace FinancialManagement.Identity.Configurations
     {
         public string Issuer { get; set; } = string.Empty;
         public string Audience { get; set; } = string.Empty;
-        public SigningCredentials SigningCredentials { get; set; }
-        public int Expirations { get; set; }
+        public SigningCredentials? SigningCredentials { get; set; }
+        public int AccessTokenTimeExpiration { get; set; }
+        public int RefreshTokenTimeExpiration { get; set; }
+
     }
 }

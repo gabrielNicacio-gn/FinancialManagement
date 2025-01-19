@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using FinancialManagement.Api.Extensions;
@@ -16,28 +17,37 @@ public static class IdentityRoutes
         .WithTags("Autentication")
         .WithSummary("Autentication Routes");
 
-        identityRoutes.MapPost("/register", async (IIdentityServices identityServices, RegisterUserRequestDto registerUser) =>
+        identityRoutes.MapPost("/account", async (IIdentityServices identityServices, RegisterUserRequestDto registerUser) =>
         {
             var result = await identityServices.RegisterUser(registerUser);
             return result.IsSucess
             ? Results.Created("", result)
-            : Results.BadRequest(result.Errors);
+            : Results.BadRequest(result);
         })
         .Validate<RegisterUserRequestDto>()
         .AllowAnonymous();
 
-        identityRoutes.MapPost("/login", async (IIdentityServices identityServices, LoginRequestDto login) =>
+        identityRoutes.MapPost("/sign-in", async (IIdentityServices identityServices, LoginRequestDto login) =>
        {
            var result = await identityServices.Login(login);
-           var loginResult =
-           result.IsSucess ? Results.Ok(result) : Results.Unauthorized();
-           if (!result.IsSucess && result.Errors.Count > 0)
-               loginResult = Results.BadRequest(result);
-
-           return loginResult;
+           return result.IsSucess
+           ? Results.Ok(result)
+           : Results.BadRequest(result);
        })
        .Validate<LoginRequestDto>()
        .AllowAnonymous();
+
+        identityRoutes.MapPost("/refresh-token", async (IIdentityServices identityServices) =>
+       {
+           var httpContext = app.Services.GetRequiredService<IHttpContextAccessor>().HttpContext;
+           var identity = httpContext.User.Identity as ClaimsIdentity;
+           var userId = identity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+           var result = await identityServices.LoginWithoutPassword(userId);
+           return result.IsSucess
+           ? Results.Ok(result)
+           : Results.BadRequest(result);
+       })
+       .RequireAuthorization();
 
     }
 }

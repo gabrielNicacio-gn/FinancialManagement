@@ -11,6 +11,7 @@ using FinancialManagement.Infrastructure.Data;
 using FinancialManagement.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace FinancialManagement.Api.IoC;
 public static class ConfigurationIoc
@@ -39,6 +40,7 @@ public static class ConfigurationIoc
         builder.Services.AddScoped<IFinancialTargetServices, FinancialTargetServices>();
         builder.Services.AddScoped<ICategoryExpenseServices, CategoryExpenseServices>();
         builder.Services.AddScoped<IIdentityServices, IdentityServices>();
+        builder.Services.AddScoped<IMemoryCache, MemoryCache>();
 
         builder.Services.AddDefaultIdentity<User>()
         .AddEntityFrameworkStores<FinancialManagementIdentityContext>()

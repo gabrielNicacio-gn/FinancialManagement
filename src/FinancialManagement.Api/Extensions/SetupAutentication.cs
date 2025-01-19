@@ -32,7 +32,8 @@ public static class UseAtentication
             options.Audience = settingsJson[nameof(JwtOptions.Audience)]!;
             options.Issuer = settingsJson[nameof(JwtOptions.Issuer)]!;
             options.SigningCredentials = credentials;
-            options.Expirations = int.Parse(settingsJson[nameof(JwtOptions.Expirations)]!);
+            options.AccessTokenTimeExpiration = int.Parse(settingsJson[nameof(JwtOptions.AccessTokenTimeExpiration)]!);
+            options.RefreshTokenTimeExpiration = int.Parse(settingsJson[nameof(JwtOptions.RefreshTokenTimeExpiration)]!);
         });
 
         services.Configure<IdentityOptions>(options =>
@@ -60,7 +61,8 @@ public static class UseAtentication
                 ValidateLifetime = true,
 
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("JwtOptions:SecretKey").Value!))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
+                (configuration.GetSection("JwtOptions:SecretKey").Value!))
             };
         });
 
