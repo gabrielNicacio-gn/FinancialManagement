@@ -32,7 +32,7 @@ namespace FinancialManagement.Tests.UnitTest.CategoryExpenseTest.ServiceTest
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(categoryExpense.Name, result.Name);
+            Assert.Equal(categoryExpense.Name, result.Data?.Name);
         }
     }
 }

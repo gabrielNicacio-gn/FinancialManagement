@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinancialManagement.Application.DTOs.Request.CategoryExpense;
 using FinancialManagement.Application.DTOs.Response;
+using FinancialManagement.Application.DTOs.Shared;
 using FinancialManagement.Application.Interfaces.Services;
 using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Domain.Models;
@@ -20,7 +21,7 @@ namespace FinancialManagement.Application.Services
             _categoryExpenseRepository = categoryExpenseRepository;
             _logger = logger;
         }
-        public async Task<CategoryExpenseResponseDto> CreateNewCategoryExpense(CreateCategoryExpenseDto categoryExpenseDto)
+        public async Task<BaseResponseDto<CategoryExpenseResponseDto>> CreateNewCategoryExpense(CreateCategoryExpenseDto categoryExpenseDto)
         {
             var newCategoryExpense = new CategoryExpense
             {
@@ -28,25 +29,33 @@ namespace FinancialManagement.Application.Services
             };
             var categoryExpenseCreated = await _categoryExpenseRepository.AddCategoryExpense(newCategoryExpense);
             _logger.LogInformation($"CategoryExpense created with id: {categoryExpenseCreated.IdCategory}");
-            return new CategoryExpenseResponseDto(categoryExpenseCreated.IdCategory, categoryExpenseCreated.Name);
+            var newCategoryExpenseResponse = new CategoryExpenseResponseDto(categoryExpenseCreated.IdCategory,
+            categoryExpenseCreated.Name);
+            return new BaseResponseDto<CategoryExpenseResponseDto>(newCategoryExpenseResponse);
 
         }
 
-        public async Task<IEnumerable<CategoryExpenseResponseDto>> GetAllCategoryExpenses()
+        public async Task<BaseResponseDto<IEnumerable<CategoryExpenseResponseDto>>> GetAllCategoryExpenses()
         {
             var categoryExpenses = await _categoryExpenseRepository.GetCategoryExpenses();
             _logger.LogInformation($"CategoryExpenses found: {categoryExpenses.Count()}");
-            return categoryExpenses.Select(categoryExpense =>
+            var listCategoryExpensesResponse = categoryExpenses.Select(categoryExpense =>
              new CategoryExpenseResponseDto(categoryExpense.IdCategory, categoryExpense.Name));
+            return new BaseResponseDto<IEnumerable<CategoryExpenseResponseDto>>(listCategoryExpensesResponse);
         }
 
-        public async Task<CategoryExpenseResponseDto> GetCategoryExpenseById(Guid idCategoryExpense)
+        public async Task<BaseResponseDto<CategoryExpenseResponseDto>> GetCategoryExpenseById(Guid idCategoryExpense)
         {
-            var categoryExpense = await _categoryExpenseRepository.GetCategoryExpenseById(idCategoryExpense)
-            ?? throw new Exception("CategoryExpense not found");
-            _logger.LogInformation($"CategoryExpense found with id: {categoryExpense.IdCategory}");
-            return new CategoryExpenseResponseDto(categoryExpense.IdCategory, categoryExpense.Name);
+            var categoryExpense = await _categoryExpenseRepository.GetCategoryExpenseById(idCategoryExpense);
 
+            if (categoryExpense is null)
+            {
+                _logger.LogInformation($"Expense not found");
+                return new BaseResponseDto<CategoryExpenseResponseDto>(false);
+            }
+            _logger.LogInformation($"CategoryExpense found with id: {categoryExpense.IdCategory}");
+            var categoryExpenseResponse = new CategoryExpenseResponseDto(categoryExpense.IdCategory, categoryExpense.Name);
+            return new BaseResponseDto<CategoryExpenseResponseDto>(categoryExpenseResponse);
         }
 
         public async Task RemoveCategoryExpense(Guid idCategoryExpense)

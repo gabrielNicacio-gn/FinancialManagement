@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using FinancialManagement.Api.Extensions;
 using FinancialManagement.Application.DTOs.Request.Identity;
 using FinancialManagement.Application.Interfaces.IdentityServices;
+using FinancialManagement.Identity.Models;
 
 namespace FinancialManagement.Api.Routes;
 public static class IdentityRoutes
@@ -24,6 +25,8 @@ public static class IdentityRoutes
             ? Results.Created("", result)
             : Results.BadRequest(result);
         })
+        .Produces<User>(201)
+        .Produces<User>(400)
         .Validate<RegisterUserRequestDto>()
         .AllowAnonymous();
 
@@ -35,6 +38,8 @@ public static class IdentityRoutes
            : Results.BadRequest(result);
        })
        .Validate<LoginRequestDto>()
+       .Produces<User>(200)
+       .Produces<User>(400)
        .AllowAnonymous();
 
         identityRoutes.MapPost("/refresh-token", async (IIdentityServices identityServices) =>
@@ -47,6 +52,8 @@ public static class IdentityRoutes
            ? Results.Ok(result)
            : Results.BadRequest(result);
        })
+       .Produces(200)
+       .Produces(400)
        .RequireAuthorization();
 
     }

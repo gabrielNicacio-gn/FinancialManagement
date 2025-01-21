@@ -30,7 +30,7 @@ public class FinancialTargetRepository : IFinancialTargetRepository
                 var financialTarget = await _context
                 .FinancialTargets
                 .AsNoTracking()
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync(ft => ft.IdFinancialTarget == id);
                 return financialTarget;
         }
 

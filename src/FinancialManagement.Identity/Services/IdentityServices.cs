@@ -12,6 +12,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.IdentityModel.Tokens;
+using FinancialManagement.Application.DTOs.Response.Identity;
+using FinancialManagement.Application.DTOs.Shared;
 
 namespace FinancialManagement.Identity.Services;
 public class IdentityServices : IIdentityServices
@@ -31,7 +33,7 @@ public class IdentityServices : IIdentityServices
         _cache = cache;
     }
 
-    public async Task<RegisterUserResponseDto> RegisterUser(RegisterUserRequestDto userRequestDto)
+    public async Task<BaseResponseDto<RegisterUserResponseDto>> RegisterUser(RegisterUserRequestDto userRequestDto)
     {
         var identityUser = new User()
         {
@@ -48,7 +50,7 @@ public class IdentityServices : IIdentityServices
         if (created.Succeeded)
             await _userManager.SetLockoutEnabledAsync(identityUser, false);
 
-        var registerResponse = new RegisterUserResponseDto(created.Succeeded);
+        var registerResponse = new BaseResponseDto<RegisterUserResponseDto>(created.Succeeded);
 
         if (!created.Succeeded)
         {
@@ -58,9 +60,12 @@ public class IdentityServices : IIdentityServices
         return registerResponse;
 
     }
-    public async Task<LoginResponseDto> Login(LoginRequestDto userRequestDto)
+    public async Task<BaseResponseDto<LoginResponseDto>> Login(LoginRequestDto userRequestDto)
     {
         var user = await _userManager.FindByEmailAsync(userRequestDto.Email);
+        if (user is null)
+            return new BaseResponseDto<LoginResponseDto>(false);
+
         var result = await _signInManager.CheckPasswordSignInAsync(user, userRequestDto.Password, false);
         if (result.Succeeded)
         {
@@ -68,7 +73,7 @@ public class IdentityServices : IIdentityServices
             return await GenerateCredentials(userRequestDto.Email, result.Succeeded, user);
         }
 
-        var loginResponse = new LoginResponseDto(result.Succeeded);
+        var loginResponse = new BaseResponseDto<LoginResponseDto>(result.Succeeded);
 
         if (!result.Succeeded)
         {
@@ -84,9 +89,9 @@ public class IdentityServices : IIdentityServices
         return loginResponse;
     }
 
-    public async Task<LoginResponseDto> LoginWithoutPassword(string userId)
+    public async Task<BaseResponseDto<LoginResponseDto>> LoginWithoutPassword(string userId)
     {
-        var loginResponse = new LoginResponseDto();
+        var loginResponse = new BaseResponseDto<LoginResponseDto>();
         var user = await _userManager.FindByIdAsync(userId);
 
         if (await _userManager.IsLockedOutAsync(user))
@@ -97,10 +102,10 @@ public class IdentityServices : IIdentityServices
         return loginResponse;
     }
 
-    private async Task<LoginResponseDto> GenerateCredentials(string email, bool isSucess, User user)
+    private async Task<BaseResponseDto<LoginResponseDto>> GenerateCredentials(string email, bool isSucess, User user)
     {
         if (user is null)
-            return new LoginResponseDto(false);
+            return new BaseResponseDto<LoginResponseDto>(false);
 
         var acessTokenClaims = GetClaims(user, false);
         var refreshTokenClaims = GetClaims(user, true);
@@ -111,7 +116,8 @@ public class IdentityServices : IIdentityServices
         var accessToken = GenerateJwtToken(acessTokenClaims, acessTokenExpiration);
         var refreshToken = GenerateJwtToken(refreshTokenClaims, refreshTokenExpiration);
 
-        return new LoginResponseDto(isSucess, accessToken, refreshToken);
+        var response = new LoginResponseDto(accessToken, refreshToken);
+        return new BaseResponseDto<LoginResponseDto>(response);
     }
     private string GenerateJwtToken(IEnumerable<Claim> claims, DateTime expiration)
     {

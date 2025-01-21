@@ -32,9 +32,9 @@ public class GetFinancialTargetByIdTest
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(financialTarget.ValueNeeded, result.ValueNeeded);
-        Assert.Equal(financialTarget.DateLimit, result.DateLimit);
-        Assert.Equal(financialTarget.Description, result.Description);
-        Assert.Equal(financialTarget.Title, result.Title);
+        Assert.Equal(financialTarget.ValueNeeded, result.Data?.ValueNeeded);
+        Assert.Equal(financialTarget.DateLimit, result.Data?.DateLimit);
+        Assert.Equal(financialTarget.Description, result.Data?.Description);
+        Assert.Equal(financialTarget.Title, result.Data?.Title);
     }
 }

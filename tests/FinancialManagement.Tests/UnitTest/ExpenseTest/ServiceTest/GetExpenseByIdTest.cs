@@ -33,9 +33,9 @@ public class GetExpenseByIdTest
 
                 // Assert
                 Assert.NotNull(result);
-                Assert.Equal(expense.Description, result.Description);
-                Assert.Equal(expense.Value, result.Value);
-                Assert.Equal(expense.DateExpenses, result.DateExpense);
+                Assert.Equal(expense.Description, result.Data?.Description);
+                Assert.Equal(expense.Value, result.Data?.Value);
+                Assert.Equal(expense.DateExpenses, result.Data?.DateExpense);
                 //Assert.Equal(expense.IdCategory, result.);
                 //Assert.Equal(expense.CategoryeExpense.IdCategory, result.CategoryeExpense.IdCategory);
                 //Assert.Equal(expense.CategoryeExpense.Name, result.CategoryeExpense.Name);

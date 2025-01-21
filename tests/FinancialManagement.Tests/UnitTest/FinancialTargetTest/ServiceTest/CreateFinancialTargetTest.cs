@@ -37,9 +37,9 @@ public class CreateFinancialTargetTest
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(newFinancialTarget.Title, result.Title);
-        Assert.Equal(newFinancialTarget.ValueNeeded, result.ValueNeeded);
-        Assert.Equal(newFinancialTarget.DateLimit, result.DateLimit);
-        Assert.Equal(newFinancialTarget.Description, result.Description);
+        Assert.Equal(newFinancialTarget.Title, result.Data?.Title);
+        Assert.Equal(newFinancialTarget.ValueNeeded, result.Data?.ValueNeeded);
+        Assert.Equal(newFinancialTarget.DateLimit, result.Data?.DateLimit);
+        Assert.Equal(newFinancialTarget.Description, result.Data?.Description);
     }
 }

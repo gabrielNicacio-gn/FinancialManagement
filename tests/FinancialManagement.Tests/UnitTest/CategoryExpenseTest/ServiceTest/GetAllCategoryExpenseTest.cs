@@ -34,7 +34,7 @@ public class GetAllCategoryExpenseTest
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(categoryExpense.Count, result.Count());
+        Assert.Equal(categoryExpense.Count, result.Data?.Count());
     }
 
 }

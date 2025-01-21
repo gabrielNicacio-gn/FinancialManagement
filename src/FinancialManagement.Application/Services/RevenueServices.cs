@@ -5,6 +5,7 @@ using FinancialManagement.Domain.Interfaces.Repositories;
 using FinancialManagement.Domain.Interfaces.Services;
 using FinancialManagement.Domain.Models;
 using FinancialManagement.Application.DTOs.Request.Revenue;
+using FinancialManagement.Application.DTOs.Shared;
 
 namespace FinancialManagement.Application.Services;
 public class RevenueServices : IRevenueServices
@@ -17,7 +18,7 @@ public class RevenueServices : IRevenueServices
         _logger = logger;
     }
 
-    public async Task<RevenueResponseDto> CreateNewRevenue(CreateRevenueDto newRevenue)
+    public async Task<BaseResponseDto<RevenueResponseDto>> CreateNewRevenue(CreateRevenueDto newRevenue)
     {
         var revenue = new Revenue
         {
@@ -27,25 +28,33 @@ public class RevenueServices : IRevenueServices
         };
         var created = await _revenueRepository.AddRevenue(revenue);
         _logger.LogInformation($"Revenue created with id: {created.IdRevenue}");
-        return new RevenueResponseDto(revenue.IdRevenue, created.Value, created.DateRevenue, created.Description);
+        var newRevenueResponse = new RevenueResponseDto(revenue.IdRevenue, created.Value, created.DateRevenue,
+         created.Description);
+        return new BaseResponseDto<RevenueResponseDto>(newRevenueResponse);
     }
 
-    public async Task<IEnumerable<RevenueResponseDto>> GetAllRevenue()
+    public async Task<BaseResponseDto<IEnumerable<RevenueResponseDto>>> GetAllRevenue()
     {
         var revenues = await _revenueRepository.GetRevenues();
-        var response = revenues
+        var listRevenuesResponse = revenues
         .Select(revenue => new RevenueResponseDto(revenue.IdRevenue, revenue.Value, revenue.DateRevenue, revenue.Description));
         _logger.LogInformation("Returning all revenues");
-        return response;
+        return new BaseResponseDto<IEnumerable<RevenueResponseDto>>(listRevenuesResponse);
     }
 
-    public async Task<RevenueResponseDto> GetRevenueById(Guid idRevenue)
+    public async Task<BaseResponseDto<RevenueResponseDto>> GetRevenueById(Guid idRevenue)
     {
-        var revenue = await _revenueRepository.GetRevenueById(idRevenue)
-        ?? throw new Exception("Revenue not found");
-        var response = new RevenueResponseDto(revenue.IdRevenue, revenue.Value, revenue.DateRevenue, revenue.Description);
+        var revenue = await _revenueRepository.GetRevenueById(idRevenue);
+
+        if (revenue is null)
+        {
+            _logger.LogInformation($"Revenue not found");
+            return new BaseResponseDto<RevenueResponseDto>(false);
+        }
+
+        var revenueResponse = new RevenueResponseDto(revenue.IdRevenue, revenue.Value, revenue.DateRevenue, revenue.Description);
         _logger.LogInformation($"Returning revenue with id: {revenue.IdRevenue}");
-        return response;
+        return new BaseResponseDto<RevenueResponseDto>(revenueResponse);
     }
 
     public async Task RemoveRevenue(Guid idRevenue)

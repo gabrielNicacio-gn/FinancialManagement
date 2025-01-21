@@ -2,6 +2,7 @@
 using FinancialManagement.Api.Extensions;
 using FinancialManagement.Application.DTOs.Request.FinancialTarget;
 using FinancialManagement.Application.Interfaces.Services;
+using FinancialManagement.Domain.Models;
 
 namespace FinancialManagement.Api.Routes;
 public static class FinancialTargetEndpoints
@@ -19,23 +20,29 @@ public static class FinancialTargetEndpoints
                         return Results.Ok(financialTargets);
                 })
                 .WithSummary("Return All Financial target")
+                .Produces<FinancialTarget>(200)
                 .WithDescription("Return All Financial target");
 
                 financialTargetRoutes.MapGet("/financial-target{id}", async (IFinancialTargetServices financialTargetServices, Guid idFinancialTarget) =>
                 {
                         var financialTargets = await financialTargetServices.GetFinancialTargetById(idFinancialTarget);
-                        return Results.Ok(financialTargets);
+                        return financialTargets.IsSucess
+                        ? Results.Ok(financialTargets)
+                        : Results.NotFound();
                 })
-                .WithSummary("Return All Financial target")
-                .WithDescription("Return All Financial target");
+                .WithSummary("Return Financial target by Id")
+                .Produces<FinancialTarget>(200)
+                .Produces<FinancialTarget>(404)
+                .WithDescription("Return Financial target by Id");
 
                 financialTargetRoutes.MapPost("/financial-target", async (IFinancialTargetServices financialTargetServices, CreateFinancialTargetDto createFinancial) =>
                 {
                         var newFinancialTarget = await financialTargetServices.CreateNewFinancialTarget(createFinancial);
-                        return Results.Created($"/financial-target/{newFinancialTarget.IdFinancialTarget}", newFinancialTarget);
+                        return Results.Created($"/financial-target/{newFinancialTarget.Data?.IdFinancialTarget}", newFinancialTarget);
                 })
-                .WithSummary("Return All Financial target")
-                .WithDescription("Return All Financial target")
+                .WithSummary("Create a new Financial target")
+                .WithDescription("Create a new Financial target")
+                .Produces<FinancialTarget>(201)
                 .Validate<CreateFinancialTargetDto>();
 
                 financialTargetRoutes.MapPut("/financial-target", async (IFinancialTargetServices financialTargetServices, UpdateFinancialTargetDto updateFinancial) =>
@@ -43,8 +50,9 @@ public static class FinancialTargetEndpoints
                         await financialTargetServices.UpdateFinancialTarget(updateFinancial, updateFinancial.NamePropertyToBeUpdate);
                         return Results.NoContent();
                 })
-                .WithSummary("Return All Financial target")
-                .WithDescription("Return All Financial target")
+                .WithSummary("Update a Financial target")
+                .WithDescription("Update a Financial target")
+                .Produces<FinancialTarget>(204)
                 .Validate<UpdateFinancialTargetDto>();
 
                 financialTargetRoutes.MapDelete("/financial-target{id}", async (IFinancialTargetServices financialTargetServices, Guid idFinancialTarget) =>
@@ -52,7 +60,8 @@ public static class FinancialTargetEndpoints
                         await financialTargetServices.RemoveFinancialTarget(idFinancialTarget);
                         return Results.NoContent();
                 })
-                .WithSummary("Return All Financial target")
-                .WithDescription("Return All Financial target");
+                .WithSummary("Delete a Financial target")
+                .Produces<FinancialTarget>(204)
+                .WithDescription("Delete a Financial target");
         }
 }

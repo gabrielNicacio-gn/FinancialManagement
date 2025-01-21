@@ -40,8 +40,8 @@ public class CreateNewRevenueTest
         // Assert
         Assert.NotNull(result);
         //Assert.Equal(revenue.IdRevenue, result.IdRevenue);
-        Assert.Equal(revenue.Description, result.Description);
-        Assert.Equal(revenue.DateRevenue, result.DateRevenue);
-        Assert.Equal(revenue.Value, result.Value);
+        Assert.Equal(revenue.Description, result.Data?.Description);
+        Assert.Equal(revenue.DateRevenue, result.Data?.DateRevenue);
+        Assert.Equal(revenue.Value, result.Data?.Value);
     }
 }

@@ -40,6 +40,6 @@ public class GetRevenuesTest
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(revenues.Count, result.Count());
+        Assert.Equal(revenues.Count, result.Data?.Count());
     }
 }

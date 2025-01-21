@@ -41,6 +41,6 @@ public class GetAllFinancialTargetTest
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(financialTargetList.Count, result.Count());
+        Assert.Equal(financialTargetList.Count, result.Data?.Count());
     }
 }

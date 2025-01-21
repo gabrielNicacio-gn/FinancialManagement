@@ -18,7 +18,7 @@ public static class RevenueEndpoints
         revenueRoutes.MapPost("/revenue", async (IRevenueServices revenueServices, CreateRevenueDto request) =>
         {
             var result = await revenueServices.CreateNewRevenue(request);
-            return Results.Created($"/revenue/{result.IdRevenue}", result);
+            return Results.Created($"/revenue/{result.Data?.IdRevenue}", result);
         })
         .WithDescription("Create a new revenue")
         .WithSummary("Create a new revenue")
@@ -37,7 +37,9 @@ public static class RevenueEndpoints
         revenueRoutes.MapGet("/revenue/{id}", async (IRevenueServices revenueServices, Guid id) =>
         {
             var result = await revenueServices.GetRevenueById(id);
-            return result is null ? Results.NotFound() : Results.Ok(result);
+            return result.IsSucess
+            ? Results.Ok(result)
+            : Results.NotFound();
         })
         .WithDescription("Get revenue by id")
         .WithSummary("Get revenue by id")

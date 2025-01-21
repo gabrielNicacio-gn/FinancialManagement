@@ -29,8 +29,8 @@ public class ExpensesRepository : IExpenseRepository
                 var expenses = await _context
                 .Expenses
                 .AsNoTracking()
-                .Include(e => e.CategoryeExpense)
-                .SingleOrDefaultAsync();
+                .Include(e => e.CategoryeExpense.Expense.IdExpense == id)
+                .SingleOrDefaultAsync(ex => ex.IdExpense == id);
                 return expenses;
         }
 

@@ -49,7 +49,7 @@ public class GetAllExpensesTest
         var result = await expenseService.GetAllExpense();
 
         // Assert
-        Assert.NotEmpty(result);
-        Assert.Equal(expenses.Count, result.Count());
+        Assert.NotEmpty(result.Data!);
+        Assert.Equal(expenses.Count, result.Data?.Count());
     }
 }

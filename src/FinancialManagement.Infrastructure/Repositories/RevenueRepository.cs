@@ -40,7 +40,7 @@ public class RevenueRepository : IRevenueRepository
         {
                 var expense = await _context.Revenues
                 .AsNoTracking()
-                .SingleOrDefaultAsync(e => e.IdRevenue == id);
+                .SingleOrDefaultAsync(r => r.IdRevenue == id);
                 return expense;
         }
 

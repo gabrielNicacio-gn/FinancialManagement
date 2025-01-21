@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using FinancialManagement.Application.DTOs.Request.FinancialTarget;
 using FinancialManagement.Application.DTOs.Response;
+using FinancialManagement.Application.DTOs.Shared;
 using FinancialManagement.Application.Interfaces.Services;
 using FinancialManagement.Domain.Enums;
 using FinancialManagement.Domain.Interfaces.Repositories;
@@ -20,7 +18,7 @@ public class FinancialTargetServices : IFinancialTargetServices
                 _financialTargetRepository = financialTargetRepository;
                 _logger = logger;
         }
-        public async Task<FinancialTargetResponseDto> CreateNewFinancialTarget(CreateFinancialTargetDto newFinancialTarget)
+        public async Task<BaseResponseDto<FinancialTargetResponseDto>> CreateNewFinancialTarget(CreateFinancialTargetDto newFinancialTarget)
         {
                 var financialTarget = new FinancialTarget
                 {
@@ -32,27 +30,36 @@ public class FinancialTargetServices : IFinancialTargetServices
                 };
                 var financialTargetCreated = await _financialTargetRepository.AddFinancialTarget(financialTarget);
                 _logger.LogInformation($"Financial Target created with success{financialTargetCreated.IdFinancialTarget}");
-                return new FinancialTargetResponseDto(financialTargetCreated.IdFinancialTarget,
+                var newFinancialTargetResponse = new FinancialTargetResponseDto(financialTargetCreated.IdFinancialTarget,
                 financialTargetCreated.Title, financialTargetCreated.ValueNeeded, financialTargetCreated.DateLimit, financialTargetCreated.Status.ToString(),
                 financialTargetCreated.Description);
+                return new BaseResponseDto<FinancialTargetResponseDto>(newFinancialTargetResponse);
         }
 
-        public async Task<IEnumerable<FinancialTargetResponseDto>> GetAllFinancialTarget()
+        public async Task<BaseResponseDto<IEnumerable<FinancialTargetResponseDto>>> GetAllFinancialTarget()
         {
                 var financialTargets = await _financialTargetRepository.GetFinancialTargets();
                 _logger.LogInformation("Return all Financial Targets");
-                return financialTargets.Select(financialTarget => new FinancialTargetResponseDto(financialTarget.IdFinancialTarget,
+                var listFinancilTargets = financialTargets.Select(financialTarget => new FinancialTargetResponseDto(financialTarget.IdFinancialTarget,
                 financialTarget.Title, financialTarget.ValueNeeded, financialTarget.DateLimit, financialTarget.Status.ToString(),
                 financialTarget.Description));
+                return new BaseResponseDto<IEnumerable<FinancialTargetResponseDto>>(listFinancilTargets);
         }
 
-        public async Task<FinancialTargetResponseDto> GetFinancialTargetById(Guid idFinancialTarget)
+        public async Task<BaseResponseDto<FinancialTargetResponseDto>> GetFinancialTargetById(Guid idFinancialTarget)
         {
-                var financialTarget = await _financialTargetRepository.GetFinancialTargetById(idFinancialTarget)
-                ?? throw new Exception("Financial Target Not Found");
+                var financialTarget = await _financialTargetRepository.GetFinancialTargetById(idFinancialTarget);
+
+                if (financialTarget is null)
+                {
+                        _logger.LogInformation($"Financial Target not found");
+                        return new BaseResponseDto<FinancialTargetResponseDto>(false);
+                }
+
                 _logger.LogInformation($"Found Fiancial Target with Id{financialTarget.IdFinancialTarget}");
-                return new FinancialTargetResponseDto(financialTarget.IdFinancialTarget, financialTarget.Title,
+                var financialTargetResponse = new FinancialTargetResponseDto(financialTarget.IdFinancialTarget, financialTarget.Title,
                 financialTarget.ValueNeeded, financialTarget.DateLimit, financialTarget.Status.ToString(), financialTarget.Description);
+                return new BaseResponseDto<FinancialTargetResponseDto>(financialTargetResponse);
         }
 
         public async Task RemoveFinancialTarget(Guid idFinancialTarget)

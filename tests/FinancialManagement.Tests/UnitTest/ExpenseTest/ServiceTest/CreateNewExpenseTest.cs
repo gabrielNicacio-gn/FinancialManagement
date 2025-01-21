@@ -38,9 +38,9 @@ public class CreateNewExpenseTest
         var result = await service.CreateNewExpense(newExpense);
 
         // Assert
-        Assert.NotNull(result);
-        Assert.Equal(expense.Description, result.Description);
-        Assert.Equal(expense.Value, result.Value);
-        Assert.Equal(expense.DateExpenses, result.DateExpense);
+        Assert.NotNull(result.Data);
+        Assert.Equal(expense.Description, result.Data?.Description);
+        Assert.Equal(expense.Value, result.Data?.Value);
+        Assert.Equal(expense.DateExpenses, result.Data?.DateExpense);
     }
 }
