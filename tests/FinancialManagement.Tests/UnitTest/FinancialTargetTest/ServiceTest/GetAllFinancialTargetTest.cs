@@ -10,6 +10,7 @@ public class GetAllFinancialTargetTest
     public async Task GetAllFinancialTarget_Success()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var financialTargetList = new List<FinancialTarget>
             {
                 new FinancialTarget
@@ -32,12 +33,12 @@ public class GetAllFinancialTargetTest
 
         var iLogger = new Mock<ILogger<FinancialTargetServices>>();
         var financialTargetRepository = new Mock<IFinancialTargetRepository>();
-        financialTargetRepository.Setup(x => x.GetFinancialTargets()).ReturnsAsync(financialTargetList);
+        financialTargetRepository.Setup(x => x.GetFinancialTargets(userId)).ReturnsAsync(financialTargetList);
 
         var financialTargetService = new FinancialTargetServices(financialTargetRepository.Object, iLogger.Object);
 
         // Act
-        var result = await financialTargetService.GetAllFinancialTarget();
+        var result = await financialTargetService.GetAllFinancialTarget(userId);
 
         // Assert
         Assert.NotNull(result);

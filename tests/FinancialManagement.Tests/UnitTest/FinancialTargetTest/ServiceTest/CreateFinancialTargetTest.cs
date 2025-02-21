@@ -13,6 +13,7 @@ public class CreateFinancialTargetTest
     public async Task CreateFinancialTarget_Success()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var newFinancialTarget = new CreateFinancialTargetDto
         {
             Title = "Test",
@@ -27,13 +28,14 @@ public class CreateFinancialTargetTest
             ValueNeeded = newFinancialTarget.ValueNeeded,
             DateLimit = newFinancialTarget.DateLimit,
             Description = newFinancialTarget.Description,
+            UserId = userId
         };
         var iLogger = new Mock<ILogger<FinancialTargetServices>>();
         var mockFinancialTargetRepository = new Mock<IFinancialTargetRepository>();
         mockFinancialTargetRepository.Setup(x => x.AddFinancialTarget(It.IsAny<FinancialTarget>())).ReturnsAsync(financialTarget);
         var financialTargetService = new FinancialTargetServices(mockFinancialTargetRepository.Object, iLogger.Object);
         // Act
-        var result = await financialTargetService.CreateNewFinancialTarget(newFinancialTarget);
+        var result = await financialTargetService.CreateNewFinancialTarget(newFinancialTarget, userId);
 
         // Assert
         Assert.NotNull(result);

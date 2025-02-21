@@ -18,14 +18,15 @@ public class ExpenseServices : IExpenseServices
         _logger = logger;
     }
 
-    public async Task<BaseResponseDto<ExpenseResponseDto>> CreateNewExpense(CreateExpenseDto newExpense)
+    public async Task<BaseResponseDto<ExpenseResponseDto>> CreateNewExpense(CreateExpenseDto newExpense, Guid UserId)
     {
         var expense = new Expense
         {
             Value = newExpense.Value,
             Description = newExpense.Description,
             DateExpenses = newExpense.DateExpenses,
-            IdCategory = newExpense.CategoryExpense
+            IdCategory = newExpense.CategoryExpense,
+            UserId = UserId
         };
         var created = await _expenseRepository.AddExpenses(expense);
         _logger.LogInformation($"Expense created with id: {created.IdExpense}");
@@ -34,9 +35,9 @@ public class ExpenseServices : IExpenseServices
         return new BaseResponseDto<ExpenseResponseDto>(newExpenseResponse);
     }
 
-    public async Task<BaseResponseDto<IEnumerable<ExpenseResponseDto>>> GetAllExpense()
+    public async Task<BaseResponseDto<IEnumerable<ExpenseResponseDto>>> GetAllExpense(Guid UserId)
     {
-        var expenses = await _expenseRepository.GetExpenses();
+        var expenses = await _expenseRepository.GetExpenses(UserId);
         _logger.LogInformation($"Found {expenses.Count()} expenses");
         var listExpensesResponse = expenses
         .Select(expense => new ExpenseResponseDto(expense.IdExpense, expense.Value, expense.DateExpenses,

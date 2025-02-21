@@ -14,12 +14,13 @@ public class ExpensesRepository : IExpenseRepository
                 _context = context;
         }
 
-        public async Task<IEnumerable<Expense>> GetExpenses()
+        public async Task<IEnumerable<Expense>> GetExpenses(Guid UserId)
         {
                 var expenses = await _context.Expenses
                 .AsNoTracking()
                 .Include(e => e.CategoryeExpense)
                 .OrderByDescending(e => e.DateExpenses)
+                .Where(e => e.UserId == UserId)
                 .ToListAsync();
                 return expenses;
         }

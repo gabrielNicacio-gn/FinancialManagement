@@ -10,9 +10,9 @@ using FinancialManagement.Application.DTOs.Shared;
 namespace FinancialManagement.Application.Interfaces.Services;
 public interface IExpenseServices
 {
-    Task<BaseResponseDto<ExpenseResponseDto>> CreateNewExpense(CreateExpenseDto newExpense);
+    Task<BaseResponseDto<ExpenseResponseDto>> CreateNewExpense(CreateExpenseDto newExpense, Guid UserId);
     Task<BaseResponseDto<ExpenseResponseDto>> GetExpenseById(Guid idExpense);
-    Task<BaseResponseDto<IEnumerable<ExpenseResponseDto>>> GetAllExpense();
+    Task<BaseResponseDto<IEnumerable<ExpenseResponseDto>>> GetAllExpense(Guid UserId);
     Task UpdateExpense(UpdateExpenseDto updateExpense, string nameProperty);
     Task RemoveExpense(Guid idExpense);
 }

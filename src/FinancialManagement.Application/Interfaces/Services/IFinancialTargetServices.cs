@@ -10,9 +10,9 @@ using FinancialManagement.Domain.Models;
 namespace FinancialManagement.Application.Interfaces.Services;
 public interface IFinancialTargetServices
 {
-    Task<BaseResponseDto<FinancialTargetResponseDto>> CreateNewFinancialTarget(CreateFinancialTargetDto newRevenue);
+    Task<BaseResponseDto<FinancialTargetResponseDto>> CreateNewFinancialTarget(CreateFinancialTargetDto newRevenue, Guid UserId);
     Task<BaseResponseDto<FinancialTargetResponseDto>> GetFinancialTargetById(Guid idREvenue);
-    Task<BaseResponseDto<IEnumerable<FinancialTargetResponseDto>>> GetAllFinancialTarget();
+    Task<BaseResponseDto<IEnumerable<FinancialTargetResponseDto>>> GetAllFinancialTarget(Guid UserId);
     Task UpdateFinancialTarget(UpdateFinancialTargetDto updateFinancialTarget, string nameProperty);
     Task RemoveFinancialTarget(Guid idRevenue);
 }

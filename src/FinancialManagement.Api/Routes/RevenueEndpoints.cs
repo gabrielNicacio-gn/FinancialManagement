@@ -15,9 +15,10 @@ public static class RevenueEndpoints
         .WithSummary("Revenues routes")
         .RequireAuthorization();
 
-        revenueRoutes.MapPost("/revenue", async (IRevenueServices revenueServices, CreateRevenueDto request) =>
+        revenueRoutes.MapPost("/revenue", async (IRevenueServices revenueServices, CreateRevenueDto request, GetUserCurrent userCurrent) =>
         {
-            var result = await revenueServices.CreateNewRevenue(request);
+            var userId = userCurrent.GetUserIdFromToken();
+            var result = await revenueServices.CreateNewRevenue(request, userId);
             return Results.Created($"/revenue/{result.Data?.IdRevenue}", result);
         })
         .WithDescription("Create a new revenue")
@@ -25,9 +26,10 @@ public static class RevenueEndpoints
         .Produces(201)
         .Validate<CreateRevenueDto>();
 
-        revenueRoutes.MapGet("/revenues", async (IRevenueServices revenueServices) =>
+        revenueRoutes.MapGet("/revenues", async (IRevenueServices revenueServices, GetUserCurrent userCurrent) =>
         {
-            var result = await revenueServices.GetAllRevenue();
+            var userId = userCurrent.GetUserIdFromToken();
+            var result = await revenueServices.GetAllRevenue(userId);
             return Results.Ok(result);
         })
         .WithDescription("Get all revenues")

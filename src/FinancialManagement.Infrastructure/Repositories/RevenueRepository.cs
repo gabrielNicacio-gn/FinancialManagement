@@ -28,10 +28,12 @@ public class RevenueRepository : IRevenueRepository
                 return exist;
         }
 
-        public async Task<IEnumerable<Revenue>> GetRevenues()
+        public async Task<IEnumerable<Revenue>> GetRevenues(Guid userId)
         {
                 var expenses = await _context.Revenues
                 .AsNoTracking()
+                .Where(e => e.UserId == userId)
+                .OrderByDescending(e => e.DateRevenue)
                 .ToListAsync();
                 return expenses;
         }

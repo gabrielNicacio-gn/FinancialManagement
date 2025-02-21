@@ -11,9 +11,9 @@ namespace FinancialManagement.Domain.Interfaces.Services;
 
 public interface IRevenueServices
 {
-    Task<BaseResponseDto<RevenueResponseDto>> CreateNewRevenue(CreateRevenueDto newRevenue);
+    Task<BaseResponseDto<RevenueResponseDto>> CreateNewRevenue(CreateRevenueDto newRevenue, Guid userId);
     Task<BaseResponseDto<RevenueResponseDto>> GetRevenueById(Guid idREvenue);
-    Task<BaseResponseDto<IEnumerable<RevenueResponseDto>>> GetAllRevenue();
+    Task<BaseResponseDto<IEnumerable<RevenueResponseDto>>> GetAllRevenue(Guid userId);
     Task UpdateRevenue(UpdateRevenueDto updateRevenue, string nameProperty);
     Task RemoveRevenue(Guid idRevenue);
 }

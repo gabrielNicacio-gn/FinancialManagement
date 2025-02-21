@@ -18,13 +18,14 @@ public class RevenueServices : IRevenueServices
         _logger = logger;
     }
 
-    public async Task<BaseResponseDto<RevenueResponseDto>> CreateNewRevenue(CreateRevenueDto newRevenue)
+    public async Task<BaseResponseDto<RevenueResponseDto>> CreateNewRevenue(CreateRevenueDto newRevenue, Guid userId)
     {
         var revenue = new Revenue
         {
             Description = newRevenue.Description,
             Value = newRevenue.Value,
-            DateRevenue = newRevenue.DateRevenue
+            DateRevenue = newRevenue.DateRevenue,
+            UserId = userId
         };
         var created = await _revenueRepository.AddRevenue(revenue);
         _logger.LogInformation($"Revenue created with id: {created.IdRevenue}");
@@ -33,9 +34,9 @@ public class RevenueServices : IRevenueServices
         return new BaseResponseDto<RevenueResponseDto>(newRevenueResponse);
     }
 
-    public async Task<BaseResponseDto<IEnumerable<RevenueResponseDto>>> GetAllRevenue()
+    public async Task<BaseResponseDto<IEnumerable<RevenueResponseDto>>> GetAllRevenue(Guid userId)
     {
-        var revenues = await _revenueRepository.GetRevenues();
+        var revenues = await _revenueRepository.GetRevenues(userId);
         var listRevenuesResponse = revenues
         .Select(revenue => new RevenueResponseDto(revenue.IdRevenue, revenue.Value, revenue.DateRevenue, revenue.Description));
         _logger.LogInformation("Returning all revenues");

@@ -7,7 +7,7 @@ using FinancialManagement.Domain.Models;
 namespace FinancialManagement.Domain.Interfaces.Repositories;
 public interface IRevenueRepository
 {
-    Task<IEnumerable<Revenue>> GetRevenues();
+    Task<IEnumerable<Revenue>> GetRevenues(Guid userId);
     Task<Revenue?> GetRevenueById(Guid id);
     Task<Revenue> AddRevenue(Revenue revenue);
     Task UpdateRevenue(Revenue revenue, string nameProperty);

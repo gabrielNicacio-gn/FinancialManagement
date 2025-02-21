@@ -16,11 +16,12 @@ public class FinancialTargetRepository : IFinancialTargetRepository
                 _context = context;
         }
 
-        public async Task<IEnumerable<FinancialTarget>> GetFinancialTargets()
+        public async Task<IEnumerable<FinancialTarget>> GetFinancialTargets(Guid userId)
         {
                 var financialTargets = await _context.FinancialTargets
                 .AsNoTracking()
-                .OrderBy(e => e.DateLimit)
+                .OrderByDescending(e => e.DateLimit)
+                .Where(ft => ft.UserId == userId)
                 .ToListAsync();
                 return financialTargets;
         }

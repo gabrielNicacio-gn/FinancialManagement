@@ -12,6 +12,7 @@ public class CreateNewRevenueTest
     [Fact]
     public async Task Should_Create_New_Revenue()
     {
+        var userId = Guid.NewGuid();
         var newDto = new CreateRevenueDto()
         {
             Description = "Test Description",
@@ -25,6 +26,7 @@ public class CreateNewRevenueTest
             Description = newDto.Description,
             DateRevenue = newDto.DateRevenue,
             Value = newDto.Value,
+            UserId = userId
         };
 
         var revenueRepository = new Mock<IRevenueRepository>();
@@ -35,7 +37,7 @@ public class CreateNewRevenueTest
         var revenueService = new RevenueServices(revenueRepository.Object, iloggerMock.Object);
 
         // Act
-        var result = await revenueService.CreateNewRevenue(newDto);
+        var result = await revenueService.CreateNewRevenue(newDto, userId);
 
         // Assert
         Assert.NotNull(result);

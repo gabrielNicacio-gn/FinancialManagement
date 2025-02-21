@@ -10,6 +10,7 @@ public class CreateNewExpenseTest
     public async Task CreateNewExpense_Success()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var categoryId = Guid.NewGuid();
         var newExpense = new CreateExpenseDto
         {
@@ -24,7 +25,8 @@ public class CreateNewExpenseTest
             Description = newExpense.Description,
             Value = newExpense.Value,
             DateExpenses = newExpense.DateExpenses,
-            IdCategory = newExpense.CategoryExpense
+            IdCategory = newExpense.CategoryExpense,
+            UserId = userId
         };
 
         var expenseRepository = new Mock<IExpenseRepository>();
@@ -35,7 +37,7 @@ public class CreateNewExpenseTest
         var service = new ExpenseServices(expenseRepository.Object, ilogger.Object);
 
         // Act
-        var result = await service.CreateNewExpense(newExpense);
+        var result = await service.CreateNewExpense(newExpense, userId);
 
         // Assert
         Assert.NotNull(result.Data);

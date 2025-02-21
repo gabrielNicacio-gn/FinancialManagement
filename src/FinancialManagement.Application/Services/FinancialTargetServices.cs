@@ -18,7 +18,7 @@ public class FinancialTargetServices : IFinancialTargetServices
                 _financialTargetRepository = financialTargetRepository;
                 _logger = logger;
         }
-        public async Task<BaseResponseDto<FinancialTargetResponseDto>> CreateNewFinancialTarget(CreateFinancialTargetDto newFinancialTarget)
+        public async Task<BaseResponseDto<FinancialTargetResponseDto>> CreateNewFinancialTarget(CreateFinancialTargetDto newFinancialTarget, Guid userId)
         {
                 var financialTarget = new FinancialTarget
                 {
@@ -26,7 +26,8 @@ public class FinancialTargetServices : IFinancialTargetServices
                         ValueNeeded = newFinancialTarget.ValueNeeded,
                         DateLimit = newFinancialTarget.DateLimit,
                         Description = newFinancialTarget.Description,
-                        Status = StatusFinancialTarget.Accumulating
+                        Status = StatusFinancialTarget.Accumulating,
+                        UserId = userId
                 };
                 var financialTargetCreated = await _financialTargetRepository.AddFinancialTarget(financialTarget);
                 _logger.LogInformation($"Financial Target created with success{financialTargetCreated.IdFinancialTarget}");
@@ -36,9 +37,9 @@ public class FinancialTargetServices : IFinancialTargetServices
                 return new BaseResponseDto<FinancialTargetResponseDto>(newFinancialTargetResponse);
         }
 
-        public async Task<BaseResponseDto<IEnumerable<FinancialTargetResponseDto>>> GetAllFinancialTarget()
+        public async Task<BaseResponseDto<IEnumerable<FinancialTargetResponseDto>>> GetAllFinancialTarget(Guid userId)
         {
-                var financialTargets = await _financialTargetRepository.GetFinancialTargets();
+                var financialTargets = await _financialTargetRepository.GetFinancialTargets(userId);
                 _logger.LogInformation("Return all Financial Targets");
                 var listFinancilTargets = financialTargets.Select(financialTarget => new FinancialTargetResponseDto(financialTarget.IdFinancialTarget,
                 financialTarget.Title, financialTarget.ValueNeeded, financialTarget.DateLimit, financialTarget.Status.ToString(),

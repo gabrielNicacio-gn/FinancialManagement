@@ -14,9 +14,10 @@ public static class FinancialTargetEndpoints
                 .WithSummary("Financial Target routes")
                 .RequireAuthorization();
 
-                financialTargetRoutes.MapGet("/financial-targets", async (IFinancialTargetServices financialTargetServices) =>
+                financialTargetRoutes.MapGet("/financial-targets", async (IFinancialTargetServices financialTargetServices, GetUserCurrent userCurrent) =>
                 {
-                        var financialTargets = await financialTargetServices.GetAllFinancialTarget();
+                        var userId = userCurrent.GetUserIdFromToken();
+                        var financialTargets = await financialTargetServices.GetAllFinancialTarget(userId);
                         return Results.Ok(financialTargets);
                 })
                 .WithSummary("Return All Financial target")
@@ -35,9 +36,10 @@ public static class FinancialTargetEndpoints
                 .Produces(404)
                 .WithDescription("Return Financial target by Id");
 
-                financialTargetRoutes.MapPost("/financial-target", async (IFinancialTargetServices financialTargetServices, CreateFinancialTargetDto createFinancial) =>
+                financialTargetRoutes.MapPost("/financial-target", async (IFinancialTargetServices financialTargetServices, CreateFinancialTargetDto createFinancial, GetUserCurrent userCurrent) =>
                 {
-                        var newFinancialTarget = await financialTargetServices.CreateNewFinancialTarget(createFinancial);
+                        var userId = userCurrent.GetUserIdFromToken();
+                        var newFinancialTarget = await financialTargetServices.CreateNewFinancialTarget(createFinancial, userId);
                         return Results.Created($"/financial-target/{newFinancialTarget.Data?.IdFinancialTarget}", newFinancialTarget);
                 })
                 .WithSummary("Create a new Financial target")

@@ -10,6 +10,7 @@ public class GetRevenuesTest
     public async Task Should_Get_Revenues()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var revenues = new List<Revenue>
             {
                 new Revenue
@@ -18,6 +19,7 @@ public class GetRevenuesTest
                     Description = "Test Description",
                     DateRevenue = DateTime.UtcNow,
                     Value = 1000,
+                    UserId = userId
                 },
                 new Revenue
                 {
@@ -25,18 +27,19 @@ public class GetRevenuesTest
                     Description = "Test Description 2",
                     DateRevenue = DateTime.UtcNow,
                     Value = 2000,
+                    UserId = userId
                 }
             };
 
         var revenueRepository = new Mock<IRevenueRepository>();
-        revenueRepository.Setup(x => x.GetRevenues()).ReturnsAsync(revenues);
+        revenueRepository.Setup(x => x.GetRevenues(userId)).ReturnsAsync(revenues);
 
         var iloggerMock = new Mock<ILogger<RevenueServices>>();
 
         var revenueService = new RevenueServices(revenueRepository.Object, iloggerMock.Object);
 
         // Act
-        var result = await revenueService.GetAllRevenue();
+        var result = await revenueService.GetAllRevenue(userId);
 
         // Assert
         Assert.NotNull(result);

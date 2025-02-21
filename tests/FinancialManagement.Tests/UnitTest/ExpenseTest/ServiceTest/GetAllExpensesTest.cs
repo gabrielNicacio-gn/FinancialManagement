@@ -11,6 +11,7 @@ public class GetAllExpensesTest
     public async Task GetAllExpensesTest_WhenCalled_ReturnsAllExpenses()
     {
         // Arrange
+        var userId = Guid.NewGuid();
         var expenses = new List<Expense>
             {
                 new Expense
@@ -20,6 +21,7 @@ public class GetAllExpensesTest
                     Value = 100,
                     DateExpenses = DateTime.Now,
                     IdCategory = Guid.NewGuid(),
+                    UserId = userId,
                     CategoryeExpense = new CategoryExpense
                     {
                         IdCategory = Guid.NewGuid(),
@@ -33,6 +35,7 @@ public class GetAllExpensesTest
                     Value = 200,
                     DateExpenses = DateTime.Now,
                     IdCategory = Guid.NewGuid(),
+                    UserId = userId,
                     CategoryeExpense = new CategoryExpense
                     {
                         IdCategory = Guid.NewGuid(),
@@ -41,12 +44,12 @@ public class GetAllExpensesTest
                 },
             };
         var mockExpenseRepository = new Mock<IExpenseRepository>();
-        mockExpenseRepository.Setup(x => x.GetExpenses()).ReturnsAsync(expenses);
+        mockExpenseRepository.Setup(x => x.GetExpenses(userId)).ReturnsAsync(expenses);
         var ilogger = new Mock<ILogger<ExpenseServices>>();
 
         var expenseService = new ExpenseServices(mockExpenseRepository.Object, ilogger.Object);
         // Act
-        var result = await expenseService.GetAllExpense();
+        var result = await expenseService.GetAllExpense(userId);
 
         // Assert
         Assert.NotEmpty(result.Data!);

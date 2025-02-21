@@ -14,9 +14,10 @@ public static class ExpenseEndpoints
         .WithSummary("Expenses routes")
         .RequireAuthorization();
 
-        expensesRoutes.MapPost("/expense", async (IExpenseServices expenseServices, CreateExpenseDto request) =>
+        expensesRoutes.MapPost("/expense", async (IExpenseServices expenseServices, CreateExpenseDto request, GetUserCurrent userCurrent) =>
         {
-            var result = await expenseServices.CreateNewExpense(request);
+            var userId = userCurrent.GetUserIdFromToken();
+            var result = await expenseServices.CreateNewExpense(request, userId);
             return Results.Created($"/expense/{result.Data?.IdExpense}", result);
         })
         .WithDescription("Create a new expense")
@@ -24,9 +25,10 @@ public static class ExpenseEndpoints
         .Produces(201)
         .Validate<CreateExpenseDto>();
 
-        expensesRoutes.MapGet("/expenses", async (IExpenseServices expenseServices) =>
+        expensesRoutes.MapGet("/expenses", async (IExpenseServices expenseServices, GetUserCurrent userCurrent) =>
         {
-            var result = await expenseServices.GetAllExpense();
+            var userId = userCurrent.GetUserIdFromToken();
+            var result = await expenseServices.GetAllExpense(userId);
             return Results.Ok(result);
         })
         .WithDescription("Get all expenses")
