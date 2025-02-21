@@ -12,9 +12,9 @@
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/FinancialManagement.Identity.AssemblyInfo.cs
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/FinancialManagement.Identity.csproj.CoreCompileInputs.cache
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/FinancialManagement.Identity.sourcelink.json
-/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/FinancialManagement.Identity.csproj.CopyComplete
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/FinancialManagement.Identity.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/refint/FinancialManagement.Identity.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/FinancialManagement.Identity.pdb
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/FinancialManagement.Identity.genruntimeconfig.cache
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/ref/FinancialManagement.Identity.dll
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Identity/obj/Debug/net8.0/Financia.99DC51C3.Up2Date

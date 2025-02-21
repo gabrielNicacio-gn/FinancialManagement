@@ -44,9 +44,10 @@ public class CategoryExpenseRepository : ICategoryExpenseRepository
         return categoryExpense;
     }
 
-    public async Task<IEnumerable<CategoryExpense>> GetCategoryExpenses()
+    public async Task<IEnumerable<CategoryExpense>> GetCategoryExpenses(Guid IdUser)
     {
         var categoryExpenses = await _context.CategoryExpenses
+        .Where(ce => ce.UserId == IdUser)
         .AsNoTracking()
         .ToListAsync();
         return categoryExpenses;

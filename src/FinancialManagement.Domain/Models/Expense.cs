@@ -25,5 +25,8 @@ public class Expense
     public Guid IdCategory { get; set; }
     public CategoryExpense CategoryeExpense { get; set; }
 
+    [Column("user_id")]
+    public Guid UserId { get; set; }
+
     public Expense() => IdExpense = Guid.NewGuid();
 }

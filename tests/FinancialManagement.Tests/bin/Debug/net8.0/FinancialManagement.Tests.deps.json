@@ -1475,7 +1475,10 @@
           "Swashbuckle.AspNetCore": "6.6.2"
         },
         "runtime": {
-          "FinancialManagement.Api.dll": {}
+          "FinancialManagement.Api.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FinancialManagement.Application/1.0.0": {
@@ -1484,24 +1487,34 @@
           "Microsoft.Extensions.Logging": "9.0.0"
         },
         "runtime": {
-          "FinancialManagement.Application.dll": {}
+          "FinancialManagement.Application.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FinancialManagement.Domain/1.0.0": {
         "runtime": {
-          "FinancialManagement.Domain.dll": {}
+          "FinancialManagement.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FinancialManagement.Identity/1.0.0": {
         "dependencies": {
           "FinancialManagement.Application": "1.0.0",
+          "FinancialManagement.Domain": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.8",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
           "Microsoft.AspNetCore.Identity.UI": "8.0.8",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.0"
         },
         "runtime": {
-          "FinancialManagement.Identity.dll": {}
+          "FinancialManagement.Identity.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FinancialManagement.Infrastructure/1.0.0": {
@@ -1510,7 +1523,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.0"
         },
         "runtime": {
-          "FinancialManagement.Infrastructure.dll": {}
+          "FinancialManagement.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

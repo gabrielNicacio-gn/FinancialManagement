@@ -1,6 +1,8 @@
 using FinancialManagement.Api.Extensions;
 using FinancialManagement.Api.IoC;
 using FinancialManagement.Api.Routes;
+using FinancialManagement.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +19,17 @@ if (app.Environment.IsDevelopment())
         app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+        var context = scope.ServiceProvider.GetRequiredService<FinancialManagementIdentityContext>();
+        Thread.Sleep(3000);
+        context.Database.Migrate();
+}
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseHttpsRedirection();
 
 app.MapExpenseRoutes();
 app.MapRevenueRoutes();

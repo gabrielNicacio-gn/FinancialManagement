@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wEw9v+JSWLjFkhD7TI3uZ+UAn0yW/+27V/0149aUVB/VOmtAGPNKPsH7nEhqV1sgNPjtVDAQMF5aqUrTsvsYfQ==",
+  "dgSpecHash": "WV+Y3u9BYuM=",
   "success": true,
   "projectFilePath": "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/FinancialManagement.Api.csproj",
   "expectedPackageFiles": [
@@ -69,7 +69,8 @@
     "/home/nicacio/.nuget/packages/system.text.encodings.web/9.0.0/system.text.encodings.web.9.0.0.nupkg.sha512",
     "/home/nicacio/.nuget/packages/system.text.json/9.0.0/system.text.json.9.0.0.nupkg.sha512",
     "/home/nicacio/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512",
-    "/home/nicacio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
+    "/home/nicacio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.12/microsoft.aspnetcore.app.ref.8.0.12.nupkg.sha512",
+    "/home/nicacio/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.12/microsoft.netcore.app.host.linux-x64.8.0.12.nupkg.sha512"
   ],
   "logs": []
 }

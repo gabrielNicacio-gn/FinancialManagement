@@ -3053,6 +3053,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "FinancialManagement.Application >= 1.0.0",
+      "FinancialManagement.Domain >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.8",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.8",
       "Microsoft.AspNetCore.Identity.UI >= 8.0.8",
@@ -3087,6 +3088,9 @@
           "projectReferences": {
             "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/FinancialManagement.Application.csproj": {
               "projectPath": "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Application/FinancialManagement.Application.csproj"
+            },
+            "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Domain/FinancialManagement.Domain.csproj": {
+              "projectPath": "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Domain/FinancialManagement.Domain.csproj"
             }
           }
         }
@@ -3095,7 +3099,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -3138,7 +3148,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.10, 8.0.10]"
+            "version": "[8.0.12, 8.0.12]"
           }
         ],
         "frameworkReferences": {
@@ -3146,7 +3156,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.110/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

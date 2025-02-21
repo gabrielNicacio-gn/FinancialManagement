@@ -28,6 +28,9 @@ public class FinancialTarget
     [Column("description_target")]
     public string Description { get; set; } = "";
 
+    [Column("user_id")]
+    public Guid UserId { get; set; }
+
     public FinancialTarget() => IdFinancialTarget = Guid.NewGuid();
 
 }

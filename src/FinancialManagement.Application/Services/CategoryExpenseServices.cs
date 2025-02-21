@@ -21,11 +21,12 @@ namespace FinancialManagement.Application.Services
             _categoryExpenseRepository = categoryExpenseRepository;
             _logger = logger;
         }
-        public async Task<BaseResponseDto<CategoryExpenseResponseDto>> CreateNewCategoryExpense(CreateCategoryExpenseDto categoryExpenseDto)
+        public async Task<BaseResponseDto<CategoryExpenseResponseDto>> CreateNewCategoryExpense(CreateCategoryExpenseDto categoryExpenseDto, Guid IdUser)
         {
             var newCategoryExpense = new CategoryExpense
             {
                 Name = categoryExpenseDto.Name,
+                UserId = IdUser
             };
             var categoryExpenseCreated = await _categoryExpenseRepository.AddCategoryExpense(newCategoryExpense);
             _logger.LogInformation($"CategoryExpense created with id: {categoryExpenseCreated.IdCategory}");
@@ -35,9 +36,9 @@ namespace FinancialManagement.Application.Services
 
         }
 
-        public async Task<BaseResponseDto<IEnumerable<CategoryExpenseResponseDto>>> GetAllCategoryExpenses()
+        public async Task<BaseResponseDto<IEnumerable<CategoryExpenseResponseDto>>> GetAllCategoryExpenses(Guid UserId)
         {
-            var categoryExpenses = await _categoryExpenseRepository.GetCategoryExpenses();
+            var categoryExpenses = await _categoryExpenseRepository.GetCategoryExpenses(UserId);
             _logger.LogInformation($"CategoryExpenses found: {categoryExpenses.Count()}");
             var listCategoryExpensesResponse = categoryExpenses.Select(categoryExpense =>
              new CategoryExpenseResponseDto(categoryExpense.IdCategory, categoryExpense.Name));

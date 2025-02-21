@@ -3,31 +3,57 @@ networks:
     driver: bridge
 
 services:
-  db:
+  database:
     image: postgres:17.2
-
-    env_file:
-      - config.env
+    environment:
+      - POSTGRES_USER=finanManag
+      - POSTGRES_PASSWORD=YMgKAwcbtNdJiphuaeAlytxMx
+      - POSTGRES_DB=financial_db
+      #volumes:
+      #- postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    volumes:
-      - ../db/create_tables_v1.sql:/docker-entrypoint-initdb.d/create_tables_v1.sql
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U finanManag -d financial_db" ]
       interval: 8s
       timeout: 3s
-      retries: 3
+      retries: 2
     networks:
       - financialNetwork
-  #init:
-  # image: postgres:16.2
-  # volumes:
-  #   - ../db/create_tables_v1.sql:/db/create_tables_v1.sql
-  # env_file:
-  #   - config.env
-  # depends_on:
-  #   db:
-  #     condition: service_healthy
-  # command: [ "sh", "-c", "exec psql -h db -U finanManag -d financial_db -W '${POSTGRES_PASSWORD-}' -f /db/create_tables_v1.sql" ]
-  # networks:
-  #   - financialNetwork
+  api:
+    build: ../
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+      #healthcheck:
+      #test: [ "CMD-SHELL", " pg_isready -U finanManag -d financial_db && curl -f http://localhost:8080/health" ]
+      #interval: 30s
+      #timeout: 10s
+      #retries: 5
+    networks:
+      - financialNetwork
+
+  create_tables:
+    image: postgres:17.2
+    depends_on:
+      - api
+    volumes:
+      - ../db/create_tables_v1.sql:/docker-entrypoint-initdb.d/create_tables_v1.sql
+    entrypoint: [ "/bin/sh", "-c" ]
+    command:
+      - |
+        echo "Waiting for the database to be ready..."
+        sleep 40
+        echo "Executing create_tables_v1.sql..."
+        PGPASSWORD="YMgKAwcbtNdJiphuaeAlytxMx" \
+        psql -h database -U finanManag -d financial_db -f /docker-entrypoint-initdb.d/create_tables_v1.sql
+    restart: "no"
+    networks:
+      - financialNetwork
+
+volumes:
+  postgres_data:

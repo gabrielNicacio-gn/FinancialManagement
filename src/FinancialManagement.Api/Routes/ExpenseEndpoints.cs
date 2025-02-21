@@ -21,7 +21,7 @@ public static class ExpenseEndpoints
         })
         .WithDescription("Create a new expense")
         .WithSummary("Create a new expense")
-        .Produces<Expense>(201)
+        .Produces(201)
         .Validate<CreateExpenseDto>();
 
         expensesRoutes.MapGet("/expenses", async (IExpenseServices expenseServices) =>
@@ -30,7 +30,7 @@ public static class ExpenseEndpoints
             return Results.Ok(result);
         })
         .WithDescription("Get all expenses")
-        .Produces<Expense>(200)
+        .Produces(200)
         .WithSummary("Get all expenses");
 
         expensesRoutes.MapGet("/expense{id}", async (IExpenseServices expenseServices, Guid id) =>
@@ -41,8 +41,8 @@ public static class ExpenseEndpoints
             : Results.NotFound();
         })
         .WithDescription("Get all expenses")
-        .Produces<Expense>(200)
-        .Produces<Expense>(404)
+        .Produces(200)
+        .Produces(404)
         .WithSummary("Get all expenses");
 
         expensesRoutes.MapPut("/expense", async (IExpenseServices expenseServices, UpdateExpenseDto request) =>
@@ -52,7 +52,7 @@ public static class ExpenseEndpoints
         })
         .WithDescription("Update an expense")
         .WithSummary("Update an expense")
-        .Produces<Expense>(204)
+        .Produces(204)
         .Validate<UpdateExpenseDto>();
 
         expensesRoutes.MapDelete("/expense{id}", async (IExpenseServices expenseServices, Guid id) =>
@@ -61,7 +61,7 @@ public static class ExpenseEndpoints
             return Results.NoContent();
         })
         .WithDescription("Delete an expense")
-        .Produces<Expense>(204)
+        .Produces(204)
         .WithSummary("Delete an expense");
     }
 }

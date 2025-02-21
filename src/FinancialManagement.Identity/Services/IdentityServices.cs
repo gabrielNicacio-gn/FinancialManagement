@@ -110,8 +110,8 @@ public class IdentityServices : IIdentityServices
         var acessTokenClaims = GetClaims(user, false);
         var refreshTokenClaims = GetClaims(user, true);
 
-        var acessTokenExpiration = DateTime.UtcNow.AddSeconds(_jwtBearer.AccessTokenTimeExpiration);
-        var refreshTokenExpiration = DateTime.UtcNow.AddSeconds(_jwtBearer.RefreshTokenTimeExpiration);
+        var acessTokenExpiration = DateTime.UtcNow.AddMinutes(_jwtBearer.AccessTokenTimeExpiration);
+        var refreshTokenExpiration = DateTime.UtcNow.AddMinutes(_jwtBearer.RefreshTokenTimeExpiration);
 
         var accessToken = GenerateJwtToken(acessTokenClaims, acessTokenExpiration);
         var refreshToken = GenerateJwtToken(refreshTokenClaims, refreshTokenExpiration);

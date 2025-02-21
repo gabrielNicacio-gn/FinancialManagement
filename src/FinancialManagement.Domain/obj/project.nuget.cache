@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "/CPDm/z7xwT95WJt+NXmEC1eHychHeifhBi3VzXUqL6UqJOJyrVlCVdk9bn2r8fcbRYyiLJOeRxL6oabUjN7+Q==",
+  "dgSpecHash": "TUkn5JsfSig=",
   "success": true,
   "projectFilePath": "/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Domain/FinancialManagement.Domain.csproj",
   "expectedPackageFiles": [
-    "/home/nicacio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
+    "/home/nicacio/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.12/microsoft.aspnetcore.app.ref.8.0.12.nupkg.sha512"
   ],
   "logs": []
 }

@@ -13,6 +13,7 @@ namespace FinancialManagement.Tests.UnitTest.CategoryExpenseTest.ServiceTest
         public async Task CreateNewCategoryExpense_Success()
         {
             // Arrange
+            var userId = Guid.NewGuid();
             var newCategoryExpense = new CreateCategoryExpenseDto
             {
                 Name = "Test Category Expense",
@@ -21,6 +22,7 @@ namespace FinancialManagement.Tests.UnitTest.CategoryExpenseTest.ServiceTest
             {
                 IdCategory = Guid.NewGuid(),
                 Name = newCategoryExpense.Name,
+                UserId = userId
             };
             var iLogger = new Mock<ILogger<CategoryExpenseServices>>();
             var mockCategoryExpenseRepository = new Mock<ICategoryExpenseRepository>();
@@ -28,7 +30,7 @@ namespace FinancialManagement.Tests.UnitTest.CategoryExpenseTest.ServiceTest
 
             var categoryExpenseService = new CategoryExpenseServices(mockCategoryExpenseRepository.Object, iLogger.Object);
             // Act
-            var result = await categoryExpenseService.CreateNewCategoryExpense(newCategoryExpense);
+            var result = await categoryExpenseService.CreateNewCategoryExpense(newCategoryExpense, userId);
 
             // Assert
             Assert.NotNull(result);

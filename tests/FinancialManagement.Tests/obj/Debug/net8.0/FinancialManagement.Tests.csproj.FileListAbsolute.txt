@@ -130,7 +130,6 @@
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/obj/Debug/net8.0/FinancialManagement.Tests.AssemblyInfo.cs
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/obj/Debug/net8.0/FinancialManagement.Tests.csproj.CoreCompileInputs.cache
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/obj/Debug/net8.0/FinancialManagement.Tests.sourcelink.json
-/home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/obj/Debug/net8.0/FinancialManagement.Tests.csproj.CopyComplete
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/obj/Debug/net8.0/FinancialManagement.Tests.dll
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/obj/Debug/net8.0/refint/FinancialManagement.Tests.dll
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/obj/Debug/net8.0/FinancialManagement.Tests.pdb
@@ -153,3 +152,6 @@
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/bin/Debug/net8.0/FinancialManagement.Identity.dll
 /home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/bin/Debug/net8.0/FinancialManagement.Identity.pdb
+/home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/bin/Debug/net8.0/global.json
+/home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/bin/Debug/net8.0/FinancialManagement.Api.staticwebassets.endpoints.json
+/home/nicacio/Dev/FinancialManagement/tests/FinancialManagement.Tests/obj/Debug/net8.0/Financia.C6BBA5E1.Up2Date

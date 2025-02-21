@@ -1,4 +1,5 @@
 
+using FinancialManagement.Api.Extensions;
 using FinancialManagement.Application.Interfaces.IdentityServices;
 using FinancialManagement.Application.Interfaces.Services;
 using FinancialManagement.Application.Services;
@@ -28,19 +29,20 @@ public static class ConfigurationIoc
             options.UseNpgsql(builder.Configuration.GetConnectionString("npgsqlConnStr"));
         });
 
-
-
         builder.Services.AddScoped<IExpenseRepository, ExpensesRepository>();
         builder.Services.AddScoped<IRevenueRepository, RevenueRepository>();
         builder.Services.AddScoped<IFinancialTargetRepository, FinancialTargetRepository>();
         builder.Services.AddScoped<ICategoryExpenseRepository, CategoryExpenseRepository>();
+        builder.Services.AddScoped<GetUserCurrent>();
 
         builder.Services.AddScoped<IRevenueServices, RevenueServices>();
         builder.Services.AddScoped<IExpenseServices, ExpenseServices>();
         builder.Services.AddScoped<IFinancialTargetServices, FinancialTargetServices>();
         builder.Services.AddScoped<ICategoryExpenseServices, CategoryExpenseServices>();
+
+        builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+
         builder.Services.AddScoped<IIdentityServices, IdentityServices>();
-        builder.Services.AddScoped<IMemoryCache, MemoryCache>();
 
         builder.Services.AddDefaultIdentity<User>()
         .AddEntityFrameworkStores<FinancialManagementIdentityContext>()

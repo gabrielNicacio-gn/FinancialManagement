@@ -22,7 +22,7 @@ public static class RevenueEndpoints
         })
         .WithDescription("Create a new revenue")
         .WithSummary("Create a new revenue")
-        .Produces<Revenue>(201)
+        .Produces(201)
         .Validate<CreateRevenueDto>();
 
         revenueRoutes.MapGet("/revenues", async (IRevenueServices revenueServices) =>
@@ -32,7 +32,7 @@ public static class RevenueEndpoints
         })
         .WithDescription("Get all revenues")
         .WithSummary("Get all revenues")
-        .Produces<List<Revenue>>(200);
+        .Produces(200);
 
         revenueRoutes.MapGet("/revenue/{id}", async (IRevenueServices revenueServices, Guid id) =>
         {
@@ -43,7 +43,7 @@ public static class RevenueEndpoints
         })
         .WithDescription("Get revenue by id")
         .WithSummary("Get revenue by id")
-        .Produces<Revenue>(200)
+        .Produces(200)
         .Produces(404);
 
         revenueRoutes.MapPut("/revenue", async (IRevenueServices revenueServices, UpdateRevenueDto request) =>

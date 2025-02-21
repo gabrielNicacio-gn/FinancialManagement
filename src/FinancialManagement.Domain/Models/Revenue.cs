@@ -20,5 +20,9 @@ public class Revenue
 
     [Column("description_revenue")]
     public string Description { get; set; } = "";
+
+    [Column("user_id")]
+    public Guid UserId { get; set; }
+
     public Revenue() => IdRevenue = Guid.NewGuid();
 }

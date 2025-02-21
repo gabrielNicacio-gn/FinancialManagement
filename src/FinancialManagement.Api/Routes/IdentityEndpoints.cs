@@ -25,8 +25,8 @@ public static class IdentityRoutes
             ? Results.Created("", result)
             : Results.BadRequest(result);
         })
-        .Produces<User>(201)
-        .Produces<User>(400)
+        .Produces(201)
+        .Produces(400)
         .Validate<RegisterUserRequestDto>()
         .AllowAnonymous();
 
@@ -38,8 +38,8 @@ public static class IdentityRoutes
            : Results.BadRequest(result);
        })
        .Validate<LoginRequestDto>()
-       .Produces<User>(200)
-       .Produces<User>(400)
+       .Produces(200)
+       .Produces(400)
        .AllowAnonymous();
 
         identityRoutes.MapPost("/refresh-token", async (IIdentityServices identityServices) =>

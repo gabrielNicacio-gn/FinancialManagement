@@ -20,7 +20,7 @@ public static class FinancialTargetEndpoints
                         return Results.Ok(financialTargets);
                 })
                 .WithSummary("Return All Financial target")
-                .Produces<FinancialTarget>(200)
+                .Produces(200)
                 .WithDescription("Return All Financial target");
 
                 financialTargetRoutes.MapGet("/financial-target{id}", async (IFinancialTargetServices financialTargetServices, Guid idFinancialTarget) =>
@@ -31,8 +31,8 @@ public static class FinancialTargetEndpoints
                         : Results.NotFound();
                 })
                 .WithSummary("Return Financial target by Id")
-                .Produces<FinancialTarget>(200)
-                .Produces<FinancialTarget>(404)
+                .Produces(200)
+                .Produces(404)
                 .WithDescription("Return Financial target by Id");
 
                 financialTargetRoutes.MapPost("/financial-target", async (IFinancialTargetServices financialTargetServices, CreateFinancialTargetDto createFinancial) =>
@@ -42,7 +42,7 @@ public static class FinancialTargetEndpoints
                 })
                 .WithSummary("Create a new Financial target")
                 .WithDescription("Create a new Financial target")
-                .Produces<FinancialTarget>(201)
+                .Produces(201)
                 .Validate<CreateFinancialTargetDto>();
 
                 financialTargetRoutes.MapPut("/financial-target", async (IFinancialTargetServices financialTargetServices, UpdateFinancialTargetDto updateFinancial) =>
@@ -52,7 +52,7 @@ public static class FinancialTargetEndpoints
                 })
                 .WithSummary("Update a Financial target")
                 .WithDescription("Update a Financial target")
-                .Produces<FinancialTarget>(204)
+                .Produces(204)
                 .Validate<UpdateFinancialTargetDto>();
 
                 financialTargetRoutes.MapDelete("/financial-target{id}", async (IFinancialTargetServices financialTargetServices, Guid idFinancialTarget) =>
@@ -61,7 +61,7 @@ public static class FinancialTargetEndpoints
                         return Results.NoContent();
                 })
                 .WithSummary("Delete a Financial target")
-                .Produces<FinancialTarget>(204)
+                .Produces(204)
                 .WithDescription("Delete a Financial target");
         }
 }

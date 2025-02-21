@@ -150,9 +150,13 @@
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.FinancialManagement.Api.props
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/staticwebassets.pack.json
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/scopedcss/bundle/FinancialManagement.Api.styles.css
-/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.csproj.CopyComplete
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/refint/FinancialManagement.Api.dll
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.pdb
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/FinancialManagement.Api.genruntimeconfig.cache
 /home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/ref/FinancialManagement.Api.dll
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/global.json
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/bin/Debug/net8.0/FinancialManagement.Api.staticwebassets.endpoints.json
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/staticwebassets/msbuild.FinancialManagement.Api.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+/home/nicacio/Dev/FinancialManagement/src/FinancialManagement.Api/obj/Debug/net8.0/Financia.DAFE3F0C.Up2Date
