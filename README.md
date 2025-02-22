@@ -13,11 +13,11 @@ Wait for docker to upload all the dependencies and generate the tables in the da
 
 ### Using the project ###
 
-- In browser, enter the following URL for open swagger interface
-  (http://localhost:8080/swagger)
+- In browser, enter the following URL for open swagger interface <br>
+  <http://localhost:8080/swagger>
   
-- In terminal, use the curl in some of the API routess
-  (curl http://localhost:8080/"route")
+- In terminal, use the curl in some of the API routess </br>
+  **curl http://localhost:8080/"route"**
   
   **That's why you need to create an account and pass the JWT token to use the other features** 
 
