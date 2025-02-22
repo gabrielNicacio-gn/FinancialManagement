@@ -2,8 +2,13 @@
 REST Api developed for assist in personal financial management, offering features suh as creating financial targets, entering expenses and revenues.
 
 ## Running locally with Docker
-- In the ./FinancialManagement/docker, type the following command:
-``` docker compose up -d ```
+Make sure you have docker installed, and tye the following comands:
+```
+git clone https://github.com/gabrielNicacio-gn/FinancialManagement.git
+cd FinancialManagement/docker
+docker compose up -d
+```
+
 Wait for docker to upload all the dependencies and generate the tables in the database
 
 ### Using the project ###
@@ -17,15 +22,21 @@ Wait for docker to upload all the dependencies and generate the tables in the da
   **That's why you need to create an account and pass the JWT token to use the other features** 
 
 - For stop executing the project
-  ```docker compose down ```
+
+  ```
+  docker compose down
+  ```
+  
 - For stop and delete the images docker genereated, use
-  ``` docker compose down --rmi all ```
+  ```
+  docker compose down --rmi all
+  ```
   
 ## Technologies
 - Stack .NET (C#, Asp.NET, Entity Framework), Postgres for database and Docker for infrastructure
 
 ## API Endpoints
-  Method  |       Route                Description
+  Method      |       Route           |     Description
 :------------:|:---------------------:|:---------------------------------------------------------------
   **POST**    |       /accounts       | Create account user 
   **POST**    |       /sign-in        | Sign-in user, generate token and refresh token
