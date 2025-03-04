@@ -42,26 +42,26 @@ Wait for docker to upload all the dependencies and generate the tables in the da
   **POST**    |       /accounts       | Create account user 
   **POST**    |       /sign-in        | Sign-in user, generate token and refresh token
   **POST**    |   /refresh-token      | Use refresh token, for to maintain the user session
-  **GET**     |    /revenue{id}       | Get revunue by Id
+  **GET**     |    /revenue/{id}       | Get revunue by Id
   **GET**     |    /revenues          | Get all revenues
  **POST**     |     /revenue          | Create a new revenue
-  **PUT**     |    /revunue{id}       | Update a revenue by Id 
-**DELETE**    |     /revenue{id}      | Delete a revenue by Id
- **GET**      |     /expense{id}      | Get expense by Id
+  **PUT**     |    /revunue/{id}       | Update a revenue by Id 
+**DELETE**    |     /revenue/{id}      | Delete a revenue by Id
+ **GET**      |     /expense/{id}      | Get expense by Id
  **GET**      |    /expenses          | Get all expenses
  **POST**     |    /expense           | Create a new expense
- **PUT**      |   /expense{id}        | Update a expense by Id
- **DELETE**   |   /expense{id}        | Delete a expense by Id
- **GET**      | /category-expense{id} | Get category by Id
+ **PUT**      |   /expense/{id}        | Update a expense by Id
+ **DELETE**   |   /expense/{id}        | Delete a expense by Id
+ **GET**      | /category-expense/{id} | Get category by Id
  **GET**      | /categorys-expense    | Get all categorys
  **POST**     | /category-expense     | Create a new category
- **PUT**      | /category-expense{id} | Update a category
- **DELETE**   | /category-expense{id} | Delete a category
- **GET**      | /financial-target{id} | Get target by Id
+ **PUT**      | /category-expense/{id} | Update a category
+ **DELETE**   | /category-expense/{id} | Delete a category
+ **GET**      | /financial-target/{id} | Get target by Id
  **GET**      |  /financial-targets   | Get all targets
  **POST**     |  /financial-target    | Create a new target
- **PUT**      | /financial-target{id} | Update target by Id
- **DELETE**   | /financial-target{id} | Delete target by Id
+ **PUT**      | /financial-target/{id} | Update target by Id
+ **DELETE**   | /financial-target/{id} | Delete target by Id
 
 
  
